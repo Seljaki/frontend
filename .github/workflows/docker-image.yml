@@ -3,8 +3,6 @@ name: Publish docker image
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
   push_to_registry:
@@ -43,7 +41,7 @@ jobs:
       - name: Waiting for docker upload
         uses: jakejarvis/wait-action@master
         with:
-          time: '15s'
+          time: '20s'
       - name: Webhook
         uses: indiesdev/curl@v1.1
         with:
