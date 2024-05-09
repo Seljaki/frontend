@@ -43,6 +43,7 @@ function LoginPage() {
 
   return (
     <div>
+      <div>UPDATED v2</div>
       Username: <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}} /> <br />
       password: <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}} /> <br />
       <button onClick={login}>Login</button>
