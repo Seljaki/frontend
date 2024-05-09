@@ -43,14 +43,14 @@ jobs:
       - name: Waiting for docker upload
         uses: jakejarvis/wait-action@master
         with:
-          time: '30s'
+          time: '15s'
       - name: Webhook
         uses: indiesdev/curl@v1.1
         with:
           url: https://seljaki-watch.schnapsen66.eu/v1/update
           method: "POST"
           accept: 200,201,204
-          timeout: 10000
+          timeout: 60000
           bearer-token: shrocks
           log-response: true
-          retries: 2
+          retries: 1
