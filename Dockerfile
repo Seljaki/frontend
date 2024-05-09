@@ -3,6 +3,7 @@ FROM node:alpine AS builder
 
 # Declaring env
 ENV NODE_ENV production
+ENV REACT_APP_SERVER=https://seljaki-server.schnapsen66.eu
 
 # Setting up the work directory
 WORKDIR /app
