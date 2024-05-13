@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { SERVER_URL } from "../constants/http"
+import {Typography} from "@mui/material";
 
 function LoginPage() {
   const [username, setUsername] = useState('')
@@ -43,7 +44,7 @@ function LoginPage() {
 
   return (
     <div>
-      <div>UPDATED v2</div>
+      <Typography>UPDATED v2</Typography>
       Username: <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}} /> <br />
       password: <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}} /> <br />
       <button onClick={login}>Login</button>
