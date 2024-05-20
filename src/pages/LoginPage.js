@@ -1,37 +1,27 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { SERVER_URL } from "../constants/http"
-import { Avatar, Button, Grid, Paper, TextField } from "@mui/material";
+import { Alert, Avatar, Button, Grid, Paper, TextField } from "@mui/material";
 import LockPersonIcon from '@mui/icons-material/LockPerson';
+import { UserContext } from "../store/userContext";
 
 function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [warning, setWarning] = useState(null)
 
-  const paperStyle = {padding : 20, width:280, margin:"20px auto"}
-    const avatarStyle = {backgroundColor:'Green'}
-    const textFieldStyle = {margin:"auto auto 15px"}
-    const buttonStyle = {padding: "auto auto 30px"}
+  const userCtx = useContext(UserContext)
 
-  const [testData, setTestData] = useState(null)
+  const paperStyle = {padding : 20, width:320, margin:"20px auto"}
+  const avatarStyle = {backgroundColor:'Green'}
+  const textFieldStyle = {margin:"auto auto 15px"}
+  const buttonStyle = {padding: "auto auto 30px"}
 
   async function login(e) {
     e.preventDefault();
-    const res = await fetch(SERVER_URL + "/auth/login", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
-    })
-    
-    if(res.status === 200) {
-      const data = await res.json()
-      const token = data.token
-      console.log(token)
-      getUsers(token)
+    setWarning(null)
+ 
+    if(!await userCtx.login(username, password)) {
+      setWarning("Uporabniško ime ali geslo je napačno")
     }
   }
 
@@ -43,11 +33,7 @@ function LoginPage() {
     })
     const data = await res.json()
     console.log(data)
-    setTestData(data)
   }
-
-  if(testData)
-    return <div>{testData.users.map(data => <pre>{JSON.stringify(data)}</pre>)}</div>
 
   return (
     <Grid>
@@ -80,9 +66,10 @@ function LoginPage() {
         value={password}
         onChange={e => setPassword(e.target.value)}
         />
+        { warning && <Alert sx={{marginBottom: "15px"}} severity="warning">{warning}</Alert>}
         <Button type='submit' color='primary' variant="contained" fullWidth style = {buttonStyle}>Prijava</Button>
       </Paper>
-  </Grid>
+    </Grid>
     );
 }
 
