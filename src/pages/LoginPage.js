@@ -7,7 +7,7 @@ function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const paperStyle = {padding : 20, height:'37vh', width:280, margin:"20px auto"}
+  const paperStyle = {padding : 20, width:280, margin:"20px auto"}
     const avatarStyle = {backgroundColor:'Green'}
     const textFieldStyle = {margin:"auto auto 15px"}
     const buttonStyle = {padding: "auto auto 30px"}
@@ -27,7 +27,7 @@ function LoginPage() {
       })
     })
     
-    if(res.status === 201) {
+    if(res.status === 200) {
       const data = await res.json()
       const token = data.token
       console.log(token)
@@ -51,38 +51,38 @@ function LoginPage() {
 
   return (
     <Grid>
-            <Paper elevation={10} style={paperStyle} component="form" onSubmit={login}>
-                <Grid align='center'>
-                    <Avatar style={avatarStyle}><LockPersonIcon/></Avatar>
-                    <h2>Prijavi se!</h2>
-                </Grid>
-                <TextField
-                required
-                id="standard-required"
-                label="Uporabniško ime"
-                variant="standard"
-                name="username"
-                fullWidth
-                style = {textFieldStyle}
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                />
-                <TextField
-                required	
-                id="standard-required"
-                label="Geslo"
-                type="password"
-                autoComplete="current-password"
-                variant="standard"
-                name="password"
-                fullWidth
-                style = {textFieldStyle}
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                />
-                <Button type='submit' color='primary' variant="contained" fullWidth style = {buttonStyle}>Prijava</Button>
-            </Paper>
+      <Paper elevation={10} style={paperStyle} component="form" onSubmit={login}>
+        <Grid align='center'>
+            <Avatar style={avatarStyle}><LockPersonIcon/></Avatar>
+            <h2>Prijavi se!</h2>
         </Grid>
+        <TextField
+        required
+        id="standard-required"
+        label="Uporabniško ime"
+        variant="standard"
+        name="username"
+        fullWidth
+        style = {textFieldStyle}
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+        />
+        <TextField
+        required	
+        id="standard-required"
+        label="Geslo"
+        type="password"
+        autoComplete="current-password"
+        variant="standard"
+        name="password"
+        fullWidth
+        style = {textFieldStyle}
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        />
+        <Button type='submit' color='primary' variant="contained" fullWidth style = {buttonStyle}>Prijava</Button>
+      </Paper>
+  </Grid>
     );
 }
 
