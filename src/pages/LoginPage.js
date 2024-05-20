@@ -1,5 +1,4 @@
 import { useContext, useState } from "react"
-import { SERVER_URL } from "../constants/http"
 import { Alert, Avatar, Button, Grid, Paper, TextField } from "@mui/material";
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import { UserContext } from "../store/userContext";
@@ -23,16 +22,6 @@ function LoginPage() {
     if(!await userCtx.login(username, password)) {
       setWarning("Uporabniško ime ali geslo je napačno")
     }
-  }
-
-  async function getUsers(token) {
-    const res = await fetch(SERVER_URL + '/users', {
-      headers: {
-        'x-auth-token': token
-      }
-    })
-    const data = await res.json()
-    console.log(data)
   }
 
   return (
