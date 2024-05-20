@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { SERVER_URL } from "../constants/http";
 
-const userInfo = { username: "", email: ""}
+const userInfo = { id: 0, username: "", email: ""}
 
 export const UserContext = createContext({
   token: "",
@@ -11,8 +11,8 @@ export const UserContext = createContext({
 })
 
 function UserContextProvider({children}) {
-  const [token, setToken] = useState(null)
-  const [user, setUser] = useState(userInfo)
+  const [token, setToken] = useState(localStorage.getItem("token"))
+  const [user, setUser] = useState(localStorage.getItem("user")? JSON.parse(localStorage.getItem("user")) : userInfo )
 
   async function login(username, password) {
     const res = await fetch(SERVER_URL + "/auth/login", {
@@ -29,9 +29,10 @@ function UserContextProvider({children}) {
     if(res.status === 200) {
       const data = await res.json()
       const { token, user } = data
-      console.log(token)
       setToken(token)
       setUser(user)
+      localStorage.setItem("token", token)
+      localStorage.setItem("user", JSON.stringify(user))
       return true
     } else {
       return false
@@ -41,6 +42,7 @@ function UserContextProvider({children}) {
   async function logout() {
     setToken(null)
     setUser(userInfo)
+    localStorage.clear()
   }
 
   const value = {
