@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import LoginPage from "./pages/LoginPage";
 import { UserContext } from "./store/userContext";
+import Routes from "./routing";
 
 function App() {
   const userCtx = useContext(UserContext)
@@ -10,8 +11,7 @@ function App() {
   
   return (
     <>
-      <div>Hello, {userCtx.user.username}</div>
-      <button onClick={() => {userCtx.logout()}}>Logout</button>
+        <Routes />
     </>
   )
 }
