@@ -1,31 +1,18 @@
 import { MapContainer, WMSTileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import "proj4leaflet";
-import { Proj} from 'leaflet';
-import { Autocomplete, Box, TextField, useTheme } from '@mui/material';
-import MapOverlay from './MapOverlay';
-import { useState } from 'react';
+import { Box, useTheme } from '@mui/material';
+import { SLO_CRS } from '../../constants/crs';
 
 function GerkMap() {
-  const [mapSearchOptions, setMapSearchOptions] = useState([])
   const theme = useTheme();
 
-  const sloCRS = new Proj.CRS("EPSG:3794","+proj=tmerc +lat_0=0 +lon_0=15 +k=0.9999 +x_0=500000 +y_0=-5000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs",
-  {
-    resolutions: [
-      262144, 131072, 65536, 32768, 16384, 8192, 4096, 2048, 1024, 512, 256,
-      128, 64, 28, 16, 8, 4, 2, 1, 0.5, 0.25, 0.1
-    ],
-  });
-
   return (
-    <>
-    <Box style={{ minWidth: "100%", height: "100vh"}}>
-      <MapContainer style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
+    <Box key="gerkMap" style={{ minWidth: "100%", height: "100vh"}}>
+      <MapContainer key="gerkMap1" style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
         minZoom={10} 
         maxZoom={21} 
         center={[46.413874, 16.063868]} 
-        crs={sloCRS} zoom={18} 
+        crs={SLO_CRS} zoom={18} 
         scrollWheelZoom={true}
       >
         <WMSTileLayer transparent={true}
@@ -76,27 +63,7 @@ function GerkMap() {
           maxZoom={21}
         />
       </MapContainer>
-      <MapOverlay style={{ top: 10, left: 100, padding: 1 }}>
-      <Autocomplete
-        freeSolo
-        id="free-solo-2-demo"
-        disableClearable
-        options={mapSearchOptions.map((option) => option.title)}
-        renderInput={(params) => (
-          <TextField
-          sx={{width: 400}}
-            {...params}
-            label="Išči"
-            InputProps={{
-              ...params.InputProps,
-              type: 'search',
-            }}
-          />
-        )}
-      />
-      </MapOverlay>
     </Box>
-    </>
   )
 }
 
