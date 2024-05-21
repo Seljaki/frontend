@@ -2,10 +2,12 @@ import { MapContainer, WMSTileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "proj4leaflet";
 import { Proj} from 'leaflet';
-import { Box, useTheme } from '@mui/material';
+import { Autocomplete, Box, TextField, useTheme } from '@mui/material';
 import MapOverlay from './MapOverlay';
+import { useState } from 'react';
 
 function GerkMap() {
+  const [mapSearchOptions, setMapSearchOptions] = useState([])
   const theme = useTheme();
 
   const sloCRS = new Proj.CRS("EPSG:3794","+proj=tmerc +lat_0=0 +lon_0=15 +k=0.9999 +x_0=500000 +y_0=-5000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs",
@@ -18,7 +20,6 @@ function GerkMap() {
 
   return (
     <>
-      
     <Box style={{ minWidth: "100%", height: "100vh"}}>
       <MapContainer style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
         minZoom={10} 
@@ -75,7 +76,25 @@ function GerkMap() {
           maxZoom={21}
         />
       </MapContainer>
-      <MapOverlay></MapOverlay>
+      <MapOverlay style={{ top: 10, left: 100, padding: 1 }}>
+      <Autocomplete
+        freeSolo
+        id="free-solo-2-demo"
+        disableClearable
+        options={mapSearchOptions.map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
+          sx={{width: 400}}
+            {...params}
+            label="Išči"
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+          />
+        )}
+      />
+      </MapOverlay>
     </Box>
     </>
   )
