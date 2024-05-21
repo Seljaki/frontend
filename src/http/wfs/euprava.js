@@ -12,7 +12,7 @@ export async function searchCadastralMunicipalitiesByName(name) {
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.opengis.net/wfs
                         http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
-    <wfs:Query typeName="SI.GURS.KN:KATASTRSKE_OBCINE">
+    <wfs:Query typeName="SI.GURS.KN:KATASTRSKE_OBCINE" srsName="EPSG:4326">
         <wfs:PropertyName>KO_ID</wfs:PropertyName>
         <wfs:PropertyName>NAZIV</wfs:PropertyName>
         <ogc:Filter>

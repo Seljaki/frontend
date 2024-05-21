@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import { Box, useTheme } from '@mui/material';
 import { SLO_CRS } from '../../constants/crs';
 
-function GerkMap() {
+function GerkMap({children}) {
   const theme = useTheme();
 
   return (
@@ -62,6 +62,7 @@ function GerkMap() {
           }}
           maxZoom={21}
         />
+        {children}
       </MapContainer>
     </Box>
   )
