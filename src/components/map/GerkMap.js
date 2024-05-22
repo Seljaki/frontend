@@ -2,12 +2,14 @@ import { MapContainer, WMSTileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Box, useTheme } from '@mui/material';
 import { SLO_CRS } from '../../constants/crs';
+import { LeafletRightClickProvider } from 'react-leaflet-rightclick';
 
 function GerkMap({children}) {
   const theme = useTheme();
 
   return (
     <Box key="gerkMap" style={{ minWidth: "100%", height: "100vh"}}>
+    <LeafletRightClickProvider>
       <MapContainer key="gerkMap1" style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
         minZoom={10} 
         maxZoom={21} 
@@ -65,6 +67,7 @@ function GerkMap({children}) {
         />
         {children}
       </MapContainer>
+      </LeafletRightClickProvider>
     </Box>
   )
 }
