@@ -28,3 +28,15 @@ export async function searchCadastralMunicipalitiesByName(name) {
   //console.log(json)
   return json.features
 }
+
+export async function getPlotForCoordinates(lat, long) {
+  const data = await fetch(WFS_EUPRAVA_KN + "?" + new URLSearchParams({
+    request: "GetFeature",
+    version: "2.0.0",
+    typeName: "SI.GURS.KN:PARCELE",
+    outputFormat: "json",
+    CQL_FILTER: `INTERSECTS(GEOM, POINT (${lat} ${long}))`,
+    SRSName: "EPSG:4326"
+  }))
+  return data.json()
+}

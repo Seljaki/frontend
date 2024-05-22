@@ -34,14 +34,15 @@ function GerkMap({children}) {
           maxZoom={21}
         />
         
-        {/* <WMSTileLayer transparent={true}
+        { <WMSTileLayer transparent={true}
           layers='SI.GURS.KN:PARCELE' //'SI.GURS.ZPDZ%3ADOF025'
           url='https://ipi.eprostor.gov.si/wms-si-gurs-kn/wms?'
           params={{
             transparent: true,
             format: 'image/png'
           }}
-        /> */}
+          maxZoom={21}
+        /> }
 
         <WMSTileLayer transparent={true}
           layers='nspire_common:DEFAULT' //'SI.GURS.ZPDZ%3ADOF025'
