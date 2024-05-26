@@ -14,8 +14,12 @@ root.render(
         <ThemeProvider theme={myTheme}>
             <UserContextProvider>
                 <CssBaseline/>
-                <SideMenu />
-                <App/>
+                <div style={{ display: 'flex', height: '100vh', minHeight: '100vh' }}>
+                    <SideMenu />
+                    <div style={{ flex: 1, padding: '20px' }}>
+                        <App/>
+                    </div>
+                </div>
             </UserContextProvider>
         </ThemeProvider>
     </React.StrictMode>
