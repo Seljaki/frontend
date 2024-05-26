@@ -14,6 +14,9 @@ const myTheme = createTheme({
         success: {
             main: '#00c853',
         },
+        custom: {
+            hover: '#0E0D0D',
+        }
     }
 })
 
