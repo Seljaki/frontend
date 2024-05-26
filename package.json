@@ -16,6 +16,7 @@
     "proj4leaflet": "^1.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-pro-sidebar": "^1.1.0",
     "react-leaflet": "^4.2.1",
     "react-leaflet-rightclick": "^1.0.2",
     "react-scripts": "5.0.1",

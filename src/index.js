@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import myTheme from "./theme";
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import UserContextProvider from './store/userContext';
+import SideMenu from "./components/SideMenu";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
         <ThemeProvider theme={myTheme}>
             <UserContextProvider>
                 <CssBaseline/>
+                <SideMenu />
                 <App/>
             </UserContextProvider>
         </ThemeProvider>
