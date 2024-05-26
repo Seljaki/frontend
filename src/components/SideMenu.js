@@ -66,7 +66,7 @@ function SideMenu() {
                             {collapsed ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                         </IconButton>
                     </MenuItem>
-                    <MenuItem icon={<MapIcon/>}> Map </MenuItem>
+                    <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
                     <MenuItem icon={<SettingsIcon/>}> Settings </MenuItem>
                     <SubMenu
                         label="drop down example"

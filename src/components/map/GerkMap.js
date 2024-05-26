@@ -8,7 +8,7 @@ function GerkMap({children}) {
   const theme = useTheme();
 
   return (
-    <Box key="gerkMap" style={{ minWidth: "100%", height: "100vh"}}>
+    <Box key="gerkMap" style={{ display: "flex", flex: 1, height: "100vh" }}>
     <LeafletRightClickProvider>
       <MapContainer key="gerkMap1" style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
         minZoom={10} 
