@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'wouter';
 import axios from 'axios';
-import { UserContext } from '../store/userContext';
-import { SERVER_URL } from '../constants/http';
+import { UserContext } from '../../store/userContext';
+import { SERVER_URL } from '../../constants/http';
 import { Box, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, useTheme } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';

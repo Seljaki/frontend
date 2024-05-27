@@ -1,11 +1,11 @@
 import { Route, Switch } from "wouter";
 import MapPage from "./pages/MapPage";
-import ListInvoices from "./components/ListInvoice";
-import AddInvoice from "./components/AddInvoice";
-import EditInvoice from "./components/EditInvoice";
-import ListCompanies from "./components/ListCompanies";
-import AddCompany from "./components/AddCompany";
-import EditCompany from "./components/EditCompany";
+import ListInvoices from "./components/invoice/ListInvoice";
+import AddInvoice from "./components/invoice/AddInvoice";
+import EditInvoice from "./components/invoice/EditInvoice";
+import ListCompanies from "./components/company/ListCompanies";
+import AddCompany from "./components/company/AddCompany";
+import EditCompany from "./components/company/EditCompany";
 import JobTypesPage from "./pages/JobTypesPage";
 
 function Routes(){

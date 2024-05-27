@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useLocation, useRoute } from 'wouter';
+import React, { useState, useContext } from 'react';
+import { useLocation } from 'wouter';
 import axios from 'axios';
-import { UserContext } from '../store/userContext';
-import { SERVER_URL } from '../constants/http';
-import { TextField, Button, Box, Typography, useTheme, Checkbox, FormControlLabel } from '@mui/material';
+import { UserContext } from '../../store/userContext';
+import { SERVER_URL } from '../../constants/http';
+import { TextField, Button, Box, Typography, useTheme, FormControlLabel, Checkbox } from '@mui/material';
 
-const EditCompany = () => {
+const AddCompany = () => {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [isTaxpayer, setIsTaxpayer] = useState(false);
@@ -16,51 +16,15 @@ const EditCompany = () => {
   const [isDefaultIssuer, setIsDefaultIssuer] = useState(false);
   const { token } = useContext(UserContext);
   const [location, setLocation] = useLocation();
-  const [match, params] = useRoute('/edit-company/:companyId');
   const [error, setError] = useState(null);
   const theme = useTheme();
-  const initialFetch = useRef(true);
-
-  useEffect(() => {
-    if (!params || !token || !initialFetch.current) {
-      return;
-    }
-
-    const fetchCompany = async () => {
-      try {
-        const response = await axios.get(`${SERVER_URL}/companies/${params.companyId}`, {
-          headers: {
-            'x-auth-token': token,
-          },
-        });
-
-        const company = response.data.company;
-        console.log('Fetched company:', company);
-        setName(company.name);
-        setAddress(company.address);
-        setIsTaxpayer(company.isTaxpayer);
-        setPhone(company.phone);
-        setTaxNumber(company.taxNumber);
-        setIban(company.iban);
-        setEmail(company.email);
-        setIsDefaultIssuer(company.defaultIssuer);
-        initialFetch.current = false;
-      } catch (err) {
-        console.error('Error:', err);
-        setError(err.response ? err.response.data.message : 'An error occurred');
-      }
-    };
-
-    fetchCompany();
-  }, [params, token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
     try {
-      console.log('Submitting:', { name, address, isTaxpayer, phone, taxNumber, iban, email, isDefaultIssuer });
-      await axios.put(`${SERVER_URL}/companies/${params.companyId}`, 
+      const response = await axios.post(`${SERVER_URL}/companies`, 
         { name, address, isTaxpayer, phone, taxNumber, iban, email, isDefaultIssuer }, 
         { headers: { 'x-auth-token': token } }
       );
@@ -75,7 +39,7 @@ const EditCompany = () => {
   return (
     <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
-        Edit Company
+        Add Company
       </Typography>
       {error && <Typography color="error">{error}</Typography>}
       <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', maxWidth: 400 }}>
@@ -84,10 +48,7 @@ const EditCompany = () => {
           variant="outlined"
           fullWidth
           value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            console.log('Name changed:', e.target.value);
-          }}
+          onChange={(e) => setName(e.target.value)}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
@@ -95,10 +56,7 @@ const EditCompany = () => {
           variant="outlined"
           fullWidth
           value={address}
-          onChange={(e) => {
-            setAddress(e.target.value);
-            console.log('Address changed:', e.target.value);
-          }}
+          onChange={(e) => setAddress(e.target.value)}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
@@ -106,10 +64,7 @@ const EditCompany = () => {
           variant="outlined"
           fullWidth
           value={phone}
-          onChange={(e) => {
-            setPhone(e.target.value);
-            console.log('Phone changed:', e.target.value);
-          }}
+          onChange={(e) => setPhone(e.target.value)}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
@@ -117,10 +72,7 @@ const EditCompany = () => {
           variant="outlined"
           fullWidth
           value={taxNumber}
-          onChange={(e) => {
-            setTaxNumber(e.target.value);
-            console.log('Tax Number changed:', e.target.value);
-          }}
+          onChange={(e) => setTaxNumber(e.target.value)}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
@@ -128,10 +80,7 @@ const EditCompany = () => {
           variant="outlined"
           fullWidth
           value={iban}
-          onChange={(e) => {
-            setIban(e.target.value);
-            console.log('IBAN changed:', e.target.value);
-          }}
+          onChange={(e) => setIban(e.target.value)}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
@@ -139,20 +88,14 @@ const EditCompany = () => {
           variant="outlined"
           fullWidth
           value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            console.log('Email changed:', e.target.value);
-          }}
+          onChange={(e) => setEmail(e.target.value)}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <FormControlLabel
           control={
             <Checkbox
               checked={isTaxpayer}
-              onChange={(e) => {
-                setIsTaxpayer(e.target.checked);
-                console.log('Is Taxpayer changed:', e.target.checked);
-              }}
+              onChange={(e) => setIsTaxpayer(e.target.checked)}
               color="primary"
             />
           }
@@ -163,10 +106,7 @@ const EditCompany = () => {
           control={
             <Checkbox
               checked={isDefaultIssuer}
-              onChange={(e) => {
-                setIsDefaultIssuer(e.target.checked);
-                console.log('Is Default Issuer changed:', e.target.checked);
-              }}
+              onChange={(e) => setIsDefaultIssuer(e.target.checked)}
               color="primary"
             />
           }
@@ -179,11 +119,11 @@ const EditCompany = () => {
           color="primary"
           fullWidth
         >
-          Update
+          Add
         </Button>
       </Box>
     </Box>
   );
 };
 
-export default EditCompany;
+export default AddCompany;
