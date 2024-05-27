@@ -1,0 +1,1 @@
+export const QUANTITY_TYPES = ["price_per_hour","price_per_piece","price_per_area"]

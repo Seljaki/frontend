@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import myTheme from "./theme";
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import UserContextProvider from './store/userContext';
-import SideMenu from "./components/SideMenu";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,12 +13,7 @@ root.render(
         <ThemeProvider theme={myTheme}>
             <UserContextProvider>
                 <CssBaseline/>
-                <div style={{ display: 'flex', height: '100vh', minHeight: '100vh' }}>
-                    <SideMenu />
-                    <div style={{ flex: 1, padding: '20px' }}>
-                        <App/>
-                    </div>
-                </div>
+                <App/>
             </UserContextProvider>
         </ThemeProvider>
     </React.StrictMode>

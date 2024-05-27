@@ -6,6 +6,7 @@ import EditInvoice from "./components/EditInvoice";
 import ListCompanies from "./components/ListCompanies";
 import AddCompany from "./components/AddCompany";
 import EditCompany from "./components/EditCompany";
+import JobTypesPage from "./pages/JobTypesPage";
 
 function Routes(){
     return(
@@ -17,6 +18,7 @@ function Routes(){
             <Route path="/add-company" component={AddCompany} />
             <Route path="/edit-company/:companyId" component={EditCompany} />
             <Route path="/map" component={MapPage} />
+            <Route path="/jobTypes" component={JobTypesPage} />
         </Switch>
     )
 }

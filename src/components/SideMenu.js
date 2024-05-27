@@ -41,65 +41,62 @@ const buttonStyles = {
 function SideMenu() {
   const theme = useTheme();
   const [collapsed, setCollapsed] = useState(false);
-
-  return (
-    <div style={{ display: 'flex', height: '100vh', minHeight: '100vh' }}>
-      <Sidebar
-        collapsed={collapsed}
-        backgroundColor={theme.palette.background.paper}
-        rootStyles={{
-          borderRight: `1px solid ${theme.palette.secondary.main}`,
-        }}
-      >
-        <Menu
-          menuItemStyles={{
-            button: ({ disabled }) => ({
-              color: disabled ? theme.palette.secondary.main : theme.palette.primary.main,
-              '&:hover': {
-                backgroundColor: theme.palette.custom.hover,
-                color: theme.palette.primary.main,
-              },
-            }),
-          }}
-        >
-          <MenuItem>
-            <IconButton onClick={() => setCollapsed(!collapsed)}
-              sx={buttonStyles} disableRipple>
-              {collapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </MenuItem>
-          <MenuItem icon={<MapIcon />}> Map </MenuItem>
-          <MenuItem icon={<SettingsIcon />}> Settings </MenuItem>
-          <MenuItem icon={<ReceiptIcon />}>
-            <Link to='/invoices' style={linkStyles}>
-              Invoices
-            </Link>
-          </MenuItem>
-          <MenuItem icon={<StoreIcon />}>
-            <Link to='/companies' style={linkStyles}>
-              Companies
-            </Link>
-          </MenuItem>
-          <SubMenu
-            label="drop down example"
-            rootStyles={subMenuContentStyles}
-            icon={<QuizIcon />}
-          >
-            <MenuItem>
-              <Link to='/hi' style={linkStyles}>
-                i have a link
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to='/' style={linkStyles}>
-                get un-hi-ed
-              </Link>
-            </MenuItem>
-          </SubMenu>
-        </Menu>
-      </Sidebar>
-    </div>
-  );
+    return (
+        <div style={{display: 'flex', height: '100vh', minHeight: '100vh'}}>
+            <Sidebar
+                collapsed={collapsed}
+                backgroundColor={theme.palette.background.paper}
+                rootStyles={{
+                    borderRight: `1px solid ${theme.palette.secondary.main}`,
+                }}
+            >
+                <Menu
+                    menuItemStyles={{
+                        button: ({disabled}) => ({
+                            color: disabled ? theme.palette.secondary.main : theme.palette.primary.main,
+                            '&:hover': {
+                                backgroundColor: theme.palette.custom.hover,
+                                color: theme.palette.primary.main,
+                            },
+                        }),
+                    }}
+                >
+                    <MenuItem>
+                        <IconButton onClick={() => setCollapsed(!collapsed)}
+                                    sx={buttonStyles} disableRipple>
+                            {collapsed ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
+                        </IconButton>
+                    </MenuItem>
+                    <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
+                    <MenuItem icon={<ReceiptIcon />}>
+                      <Link to='/invoices' style={linkStyles}>
+                        Invoices
+                      </Link>
+                    </MenuItem>
+                    <MenuItem icon={<StoreIcon />}>
+                      <Link to='/companies' style={linkStyles}>
+                        Companies
+                      </Link>
+                    </MenuItem>
+                    <MenuItem icon={<SettingsIcon/>}> Settings </MenuItem>
+                    <SubMenu
+                        label="drop down example"
+                        rootStyles={subMenuContentStyles}
+                        icon={<QuizIcon/>}
+                    >
+                        <MenuItem>
+                            <Link to='/hi' style={linkStyles}>
+                                i have a link
+                            </Link>
+                        </MenuItem>
+                        <MenuItem> <Link to='/' style={linkStyles}>
+                            get un-hi-ed
+                        </Link> </MenuItem>
+                    </SubMenu>
+                </Menu>
+            </Sidebar>
+        </div>
+    );
 }
 
 export default SideMenu;
