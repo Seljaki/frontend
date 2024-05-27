@@ -1,1 +1,1 @@
-export const EQUIPMENT_TYPES = ["truck","tractor"]
+export const EQUIPMENT_TYPES = ["TRUCK","tractor"]
