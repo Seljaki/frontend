@@ -68,15 +68,11 @@ function SideMenu() {
                         </IconButton>
                     </MenuItem>
                     <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
-                    <MenuItem icon={<ReceiptIcon />}>
-                      <Link to='/invoices' style={linkStyles}>
+                    <MenuItem icon={<ReceiptIcon />} component={<Link to="/invoices" />}>
                         Invoices
-                      </Link>
                     </MenuItem>
-                    <MenuItem icon={<StoreIcon />}>
-                      <Link to='/companies' style={linkStyles}>
+                    <MenuItem icon={<StoreIcon />} component={<Link to="/companies" />}>
                         Companies
-                      </Link>
                     </MenuItem>
                     <MenuItem icon={<SettingsIcon/>}> Settings </MenuItem>
                     <SubMenu

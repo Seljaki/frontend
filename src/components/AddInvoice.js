@@ -56,7 +56,7 @@ const AddInvoice = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
+    <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
         Add Invoice
       </Typography>
