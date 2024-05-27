@@ -1,4 +1,4 @@
-import { useMap, useMapEvents, GeoJSON } from "react-leaflet"
+import { GeoJSON } from "react-leaflet"
 import MapOverlay from "./MapOverlay"
 import { transformCordsFromEPSG4326To3794 } from "../../constants/crs"
 import { getPlotForCoordinates } from "../../http/wfs/euprava"
