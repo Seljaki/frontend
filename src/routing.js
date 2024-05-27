@@ -1,12 +1,12 @@
 import { Route, Switch } from "wouter";
 import MapPage from "./pages/MapPage";
-import AllEquipment from "./pages/Equipment/AllEquipment";
+import EquipmentPage from "./pages/EquipmentPage";
 
 function Routes(){
     return(
         <Switch>
             <Route path="/map" component={MapPage} />
-            <Route path="/Equipment" component={AllEquipment} />
+            <Route path="/Equipment" component={EquipmentPage} />
         </Switch>
     )
 }
