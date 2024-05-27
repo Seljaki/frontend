@@ -5,6 +5,7 @@ import { SERVER_URL } from "../constants/http";
 import { UserContext } from "../store/userContext";
 import EditJobType from "../components/jobType/EditJobType";
 import myTheme from "../theme";
+import { getAllJobTypes } from "../util/http/jobTypes";
 
 function JobTypesPage() {
   const [jobTypes, setJobTypes] = useState([]);
@@ -13,19 +14,10 @@ function JobTypesPage() {
   const userCtx = useContext(UserContext);
 
   useEffect(() => {
-    async function getAllJobTypes() {
-      const data = await fetch(SERVER_URL + '/jobTypes', {
-        headers: {
-          "x-auth-token": userCtx.token
-        }
-      });
-      if (data.status < 300) {
-        const json = await data.json();
-        setJobTypes(json.jobTypes);
-        console.log("JT: ", jobTypes);
-      }
+    async function getJT() {
+      setJobTypes(await getAllJobTypes(userCtx.token))
     }
-    getAllJobTypes();
+    getJT();
   }, []);
 
   async function onSubmit(jobType) {

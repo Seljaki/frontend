@@ -6,6 +6,7 @@ import { SERVER_URL } from '../../constants/http';
 import { Box, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, useTheme } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import EditJob from '../job/EditJob';
 
 const ListInvoices = () => {
   const [invoices, setInvoices] = useState([]);
@@ -38,6 +39,7 @@ const ListInvoices = () => {
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
         Invoices
       </Typography>
+      <EditJob />
       <Button component={Link} href="/invoices/add" variant="contained" color="primary" sx={{ mb: 2 }}>
         Add Invoice
       </Button>
