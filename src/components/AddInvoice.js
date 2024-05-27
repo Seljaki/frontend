@@ -1,33 +1,54 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'wouter';
 import axios from 'axios';
 import { UserContext } from '../store/userContext';
 import { SERVER_URL } from '../constants/http';
-import { TextField, Button, Box, Typography, useTheme, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { TextField, Button, Box, Typography, MenuItem, Select, FormControl, InputLabel, useTheme } from '@mui/material';
 
 const AddInvoice = () => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
   const [started, setStarted] = useState('');
+  const [ended, setEnded] = useState('');
+  const [isPaid, setIsPaid] = useState(false);
+  const [dueDate, setDueDate] = useState('');
   const [customerId, setCustomerId] = useState('');
   const [issuerId, setIssuerId] = useState('');
+  const [companies, setCompanies] = useState([]);
   const { token } = useContext(UserContext);
   const [location, setLocation] = useLocation();
   const [error, setError] = useState(null);
   const theme = useTheme();
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get(`${SERVER_URL}/companies`, {
+          headers: {
+            'x-auth-token': token,
+          },
+        });
+        setCompanies(response.data.companies);
+      } catch (err) {
+        console.error('Error fetching companies:', err);
+        setError(err.response ? err.response.data.message : 'An error occurred');
+      }
+    };
+
+    fetchCompanies();
+  }, [token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
     try {
-      const response = await axios.post(`${SERVER_URL}/invoices`, 
-        { title, note, started, customer_id: customerId, issuer_id: issuerId }, 
+      await axios.post(`${SERVER_URL}/invoices`, 
+        { title, note, started, ended, isPaid, dueDate, customer_id: customerId, issuer_id: issuerId }, 
         { headers: { 'x-auth-token': token } }
       );
 
-      console.log('Response:', response);
-      setLocation('/');
+      setLocation('/invoices');
     } catch (err) {
       console.error('Error:', err);
       setError(err.response ? err.response.data.message : 'An error occurred');
@@ -59,38 +80,62 @@ const AddInvoice = () => {
         />
         <TextField
           label="Started"
-          type="date"
           variant="outlined"
           fullWidth
+          type="date"
           value={started}
           onChange={(e) => setStarted(e.target.value)}
-          InputLabelProps={{ shrink: true }}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          label="Ended"
+          variant="outlined"
+          fullWidth
+          type="date"
+          value={ended}
+          onChange={(e) => setEnded(e.target.value)}
+          sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          label="Due Date"
+          variant="outlined"
+          fullWidth
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
+          InputLabelProps={{ shrink: true }}
         />
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>Customer ID</InputLabel>
+          <InputLabel id="customer-label">Customer</InputLabel>
           <Select
+            labelId="customer-label"
             value={customerId}
             onChange={(e) => setCustomerId(e.target.value)}
-            label="Customer ID"
-            sx={{ color: theme.palette.primary.main }}
+            label="Customer"
           >
-            {/* Add MenuItem components here for customer_id */}
-            <MenuItem value={1}>Customer 1</MenuItem>
-            <MenuItem value={2}>Customer 2</MenuItem>
+            {companies.map((company) => (
+              <MenuItem key={company.id} value={company.id}>
+                {company.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>Issuer ID</InputLabel>
+          <InputLabel id="issuer-label">Issuer</InputLabel>
           <Select
+            labelId="issuer-label"
             value={issuerId}
             onChange={(e) => setIssuerId(e.target.value)}
-            label="Issuer ID"
-            sx={{ color: theme.palette.primary.main }}
+            label="Issuer"
           >
-            {/* Add MenuItem components here for issuer_id */}
-            <MenuItem value={1}>Issuer 1</MenuItem>
-            <MenuItem value={2}>Issuer 2</MenuItem>
+            {companies.map((company) => (
+              <MenuItem key={company.id} value={company.id}>
+                {company.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <Button

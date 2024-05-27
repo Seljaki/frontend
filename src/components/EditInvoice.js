@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useLocation, useRoute } from 'wouter';
 import axios from 'axios';
 import { UserContext } from '../store/userContext';
 import { SERVER_URL } from '../constants/http';
-import { TextField, Button, Box, Typography, useTheme, MenuItem, Select, InputLabel, FormControl, Checkbox, FormControlLabel } from '@mui/material';
+import { TextField, Button, Box, Typography, MenuItem, Select, FormControl, InputLabel, useTheme } from '@mui/material';
 
 const EditInvoice = () => {
   const [title, setTitle] = useState('');
@@ -14,57 +14,79 @@ const EditInvoice = () => {
   const [dueDate, setDueDate] = useState('');
   const [customerId, setCustomerId] = useState('');
   const [issuerId, setIssuerId] = useState('');
+  const [companies, setCompanies] = useState([]);
   const { token } = useContext(UserContext);
-  const [location, setLocation] = useLocation();
-  const [match, params] = useRoute('/edit/:invoiceId');
+  const [, setLocation] = useLocation();
+  const [match, params] = useRoute('/invoices/edit/:invoiceId');
   const [error, setError] = useState(null);
   const theme = useTheme();
+  const [fetched, setFetched] = useState(false);
+
+  const fetchInvoice = useCallback(async () => {
+    try {
+      const response = await axios.get(`${SERVER_URL}/invoices/${params.invoiceId}`, {
+        headers: {
+          'x-auth-token': token,
+        },
+      });
+
+      const invoice = response.data.invoice;
+      console.log('Fetched invoice:', invoice);
+      setTitle(invoice.title);
+      setNote(invoice.note);
+      setStarted(invoice.started);
+      setEnded(invoice.ended);
+      setIsPaid(invoice.isPaid);
+      setDueDate(invoice.dueDate);
+      setCustomerId(invoice.customer_id);
+      setIssuerId(invoice.issuer_id);
+      setFetched(true);
+    } catch (err) {
+      console.error('Error fetching invoice:', err);
+      setError(err.response ? err.response.data.message : 'An error occurred while fetching the invoice');
+    }
+  }, [params.invoiceId, token]);
 
   useEffect(() => {
-    if (!params) {
-      return;
-    }
-
-    const fetchInvoice = async () => {
+    const fetchCompanies = async () => {
       try {
-        const response = await axios.get(`${SERVER_URL}/invoices/${params.invoiceId}`, {
+        const response = await axios.get(`${SERVER_URL}/companies`, {
           headers: {
             'x-auth-token': token,
           },
         });
-
-        const invoice = response.data;
-        setTitle(invoice.title);
-        setNote(invoice.note);
-        setStarted(invoice.started);
-        setEnded(invoice.ended);
-        setIsPaid(invoice.isPaid);
-        setDueDate(invoice.dueDate);
-        setCustomerId(invoice.customer_id);
-        setIssuerId(invoice.issuer_id);
+        console.log('Fetched companies:', response.data.companies);
+        setCompanies(response.data.companies);
       } catch (err) {
-        console.error('Error:', err);
-        setError(err.response ? err.response.data.message : 'An error occurred');
+        console.error('Error fetching companies:', err);
+        setError(err.response ? err.response.data.message : 'An error occurred while fetching companies');
       }
     };
 
-    fetchInvoice();
-  }, [params, token]);
+    if (params && !fetched) {
+      fetchCompanies();
+      fetchInvoice();
+    } else if (!params) {
+      console.error('No params available from useRoute hook');
+      setError('Invalid route parameters');
+    }
+  }, [params, fetchInvoice, token, fetched]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
     try {
+      console.log('Submitting:', { title, note, started, ended, isPaid, dueDate, customer_id: customerId, issuer_id: issuerId });
       await axios.put(`${SERVER_URL}/invoices/${params.invoiceId}`, 
-        { title, note, started, ended, isPaid, dueDate, customer_id: customerId, issuer_id: issuerId },
+        { title, note, started, ended, isPaid, dueDate, customer_id: customerId, issuer_id: issuerId }, 
         { headers: { 'x-auth-token': token } }
       );
 
-      setLocation('/');
+      setLocation('/invoices');
     } catch (err) {
-      console.error('Error:', err);
-      setError(err.response ? err.response.data.message : 'An error occurred');
+      console.error('Error during invoice update:', err);
+      setError(err.response ? err.response.data.message : 'An error occurred while updating the invoice');
     }
   };
 
@@ -93,69 +115,62 @@ const EditInvoice = () => {
         />
         <TextField
           label="Started"
-          type="date"
           variant="outlined"
           fullWidth
+          type="date"
           value={started}
           onChange={(e) => setStarted(e.target.value)}
-          InputLabelProps={{ shrink: true }}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
+          InputLabelProps={{ shrink: true }}
         />
         <TextField
           label="Ended"
-          type="date"
           variant="outlined"
           fullWidth
+          type="date"
           value={ended}
           onChange={(e) => setEnded(e.target.value)}
-          InputLabelProps={{ shrink: true }}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
+          InputLabelProps={{ shrink: true }}
         />
         <TextField
           label="Due Date"
-          type="date"
           variant="outlined"
           fullWidth
+          type="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
-          InputLabelProps={{ shrink: true }}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isPaid}
-              onChange={(e) => setIsPaid(e.target.checked)}
-              color="primary"
-            />
-          }
-          label="Is Paid"
-          sx={{ mb: 2 }}
+          InputLabelProps={{ shrink: true }}
         />
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>Customer ID</InputLabel>
+          <InputLabel id="customer-label">Customer</InputLabel>
           <Select
+            labelId="customer-label"
             value={customerId}
             onChange={(e) => setCustomerId(e.target.value)}
-            label="Customer ID"
-            sx={{ color: theme.palette.primary.main }}
+            label="Customer"
           >
-            {/* Add MenuItem components here for customer_id */}
-            <MenuItem value={1}>Customer 1</MenuItem>
-            <MenuItem value={2}>Customer 2</MenuItem>
+            {companies.map((company) => (
+              <MenuItem key={company.id} value={company.id}>
+                {company.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>Issuer ID</InputLabel>
+          <InputLabel id="issuer-label">Issuer</InputLabel>
           <Select
+            labelId="issuer-label"
             value={issuerId}
             onChange={(e) => setIssuerId(e.target.value)}
-            label="Issuer ID"
-            sx={{ color: theme.palette.primary.main }}
+            label="Issuer"
           >
-            {/* Add MenuItem components here for issuer_id */}
-            <MenuItem value={1}>Issuer 1</MenuItem>
-            <MenuItem value={2}>Issuer 2</MenuItem>
+            {companies.map((company) => (
+              <MenuItem key={company.id} value={company.id}>
+                {company.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <Button
