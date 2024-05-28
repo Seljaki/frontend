@@ -4,8 +4,9 @@ import { useParams } from "wouter"
 import { SERVER_URL } from "../constants/http"
 import EditJob from "../components/job/EditJob"
 import JobRow from "../components/job/JobRow"
-import { Button } from "@mui/material"
+import {Box, Button} from "@mui/material"
 import DetailedInvoiceHeader from "../components/company/DetailedInvoiceHeader"
+import myTheme from "../theme";
 
 function DetailedInvocieView() {
   const [invoice, setInvoice] = useState({})
@@ -91,11 +92,13 @@ function DetailedInvocieView() {
   }
 
   return (
-    <div style={{ maxWidth: "70%" }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: "70%" }}>
       <DetailedInvoiceHeader invoice={invoice} />
-      <Button variant="contained" onClick={() => {
+      <Button sx={{my: 2}} variant="contained" onClick={() => {
         setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
       }}>Add job</Button>
+      <div>
       { editingJob && <EditJob job={editingJob} setJob={setEditingJob} onCancel={() => {setEditingJob(null)}} onConfirm={j => {
         if(j.id)
           updateJob(j)
@@ -105,7 +108,9 @@ function DetailedInvocieView() {
       { jobs.map(j => <JobRow key={j.id} job={j} onDelete={() => {deleteJob(j.id)}} onEdit={() => {
         setEditingJob(j)
       }} />) }
+      </div>
     </div>
+    </Box>
   )
 }
 
