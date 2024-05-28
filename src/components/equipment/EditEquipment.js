@@ -2,12 +2,11 @@ import { FormControl, Paper, TextField, MenuItem, Dialog, Button } from "@mui/ma
 import { useEffect, useState } from "react";
 import { EQUIPMENT_TYPES } from "../../constants/equipment";
 
-function EditEquipment({ equipment = null, onConfirmed = (equipment) => {}, open, onClose }) {
-    const [eq, setEq] = useState({ name: '', nextService: '', nextServiceHours: 0, hours: 0, equipmentType:''});
+function EditEquipment({ equipment, setEquipment = (eq) => {}, onConfirmed = (equipment) => {}, open = true, onClose }) {
 
     useEffect(() => {
-        setEq(equipment ? equipment : { name: '', nextService: '', nextServiceHours: 0, hours: 0, equipmentType:''});
-        console.log(eq.name)
+        setEquipment(equipment ? equipment : { name: '', nextService: '', nextServiceHours: 0, hours: 0, equipmentType:''});
+        console.log(equipment.name)
     }, [equipment]);
     return (
         <Dialog open={open} onClose={onClose}>
@@ -15,42 +14,42 @@ function EditEquipment({ equipment = null, onConfirmed = (equipment) => {}, open
                 <FormControl fullWidth sx={{ gap: 2 }}>
                     <TextField
                         required
-                        value={eq.name}
+                        value={equipment.name}
                         label='Title'
-                        onChange={(e) => setEq({ ...eq, name: e.target.value })}
+                        onChange={(e) => setEquipment({ ...equipment, name: e.target.value })}
                     />
                     <TextField
-                        value={eq.nextService}
+                        value={equipment.nextService}
                         type="date"
                         label='Next service'
                         InputLabelProps={{ shrink: true }}
-                        onChange={(e) => setEq({ ...eq, nextService: e.target.value })}
+                        onChange={(e) => setEquipment({ ...equipment, nextService: e.target.value })}
                     />
                     <TextField
-                        value={eq.nextServiceHours}
+                        value={equipment.nextServiceHours}
                         type="number"
                         label='Next service hours'
-                        onChange={(e) => setEq({ ...eq, nextServiceHours: parseInt(e.target.value, 10)})}
+                        onChange={(e) => setEquipment({ ...equipment, nextServiceHours: parseInt(e.target.value, 10)})}
                     />
                     <TextField
-                        value={eq.hours}
+                        value={equipment.hours}
                         type="number"
                         label='Hours'
-                        onChange={(e) => setEq({ ...eq, hours: parseInt(e.target.value, 10) })}
+                        onChange={(e) => setEquipment({ ...equipment, hours: parseInt(e.target.value, 10) })}
                     />
                     <TextField
                         select
                         required
                         label='Equipment type'
-                        value={eq.equipmentType}
+                        value={equipment.equipmentType}
                         SelectProps={{ MenuProps: { style: { maxHeight: 300, }, }, }}
-                        onChange={e => setEq({ ...eq, equipmentType: e.target.value })}
+                        onChange={e => setEquipment({ ...equipment, equipmentType: e.target.value })}
                     >
                         {EQUIPMENT_TYPES.map((et, index) => (
                             <MenuItem key={index} value={et}>{et}</MenuItem>
                         ))}
                     </TextField>
-                    <Button variant="contained" color="primary" onClick={() => { onConfirmed(eq); onClose(); }}>Confirm</Button>
+                    <Button variant="contained" color="primary" onClick={() => { onConfirmed(equipment); onClose(); }}>Confirm</Button>
                 </FormControl>
             </Paper>
         </Dialog>

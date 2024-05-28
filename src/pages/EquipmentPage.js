@@ -9,7 +9,6 @@
     function EquipmentPage() {
         const [equipment, setEquipment] = useState([]);
         const [editingEquipment, setEditingEquipment] = useState(null);
-        const [isDialogOpen, setIsDialogOpen] = useState(false);
         const userCtx = useContext(UserContext);
 
         useEffect(() => {
@@ -57,7 +56,7 @@
             if (data.status < 300) {
                 const json = await data.json();
                 const eq = json.equipment;
-                setEquipment([eq, ...equipment.filter(e => e.id !== equipment.id)])
+                setEquipment(equipment.map(equipment => equipment.id === eq.id ? eq : equipment));
             }
         }
 
@@ -72,34 +71,31 @@
         }
 
         const handleAddEquipment = () => {
-            setEditingEquipment(null);
-            setIsDialogOpen(true);
+            setEditingEquipment({ name: '', nextService: '', nextServiceHours: 0, hours: 0, equipmentType:''});
         };
 
         const handleEditEquipment = (equipment) => {
             setEditingEquipment(equipment);
-            setIsDialogOpen(true);
         };
 
         const handleCloseDialog = () => {
             setEditingEquipment(null);
-            setIsDialogOpen(false);
         };
 
         return (
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
                 <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Equipment</Typography>
                 <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddEquipment}>Add new</Button>
-                <EditEquipment
-                    equipment={editingEquipment}
+                { editingEquipment && <EditEquipment
+                    setEquipment={setEditingEquipment}
                     onConfirmed={(e) => {
+                        console.log(e)
                         if (!e.id) onSubmit(e);
                         else onEdit(e);
                         handleCloseDialog();
                     }}
-                    open={isDialogOpen}
                     onClose={handleCloseDialog}
-                />
+                />}
                 <TableContainer component={Paper} sx={{ maxWidth: '60%' }}>
                     <Table>
                         <TableHead>
