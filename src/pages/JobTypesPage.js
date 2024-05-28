@@ -103,16 +103,16 @@ function JobTypesPage() {
               </TableRow>
             </TableHead>
             {jobTypes && jobTypes.map(jt => (
-                <JobTypeRow
-                    onDelete={async () => {
-                      if (await deletJobType(jt.id)) {
-                        setJobTypes(jobTypes.filter(j => j.id !== jt.id));
-                      }
-                    }}
-                    onEdit={() => handleEditJobType(jt)}
-                    key={jt.id}
-                    jobType={jt}
-                />
+              <JobTypeRow
+                  onDelete={async () => {
+                    if (await deletJobType(jt.id)) {
+                      setJobTypes(jobTypes.filter(j => j.id !== jt.id));
+                    }
+                  }}
+                  onEdit={() => handleEditJobType(jt)}
+                  key={jt.id}
+                  jobType={jt}
+              />
             ))}
           </Table>
         </TableContainer>

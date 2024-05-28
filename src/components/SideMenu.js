@@ -43,13 +43,14 @@ function SideMenu() {
   const theme = useTheme();
   const [collapsed, setCollapsed] = useState(false);
     return (
-        <div style={{display: 'flex', height: '100vh', minHeight: '100vh'}}>
+
             <Sidebar
                 collapsed={collapsed}
                 backgroundColor={theme.palette.background.paper}
                 rootStyles={{
                     borderRight: `1px solid ${theme.palette.secondary.main}`,
                 }}
+                style={{ minHeight: '100vh'}}
             >
                 <Menu
                     menuItemStyles={{
@@ -95,7 +96,7 @@ function SideMenu() {
                     </SubMenu>
                 </Menu>
             </Sidebar>
-        </div>
+
     );
 }
 
