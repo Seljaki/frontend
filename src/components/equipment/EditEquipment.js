@@ -7,8 +7,8 @@ function EditEquipment({ equipment = null, onConfirmed = (equipment) => {}, open
 
     useEffect(() => {
         setEq(equipment ? equipment : { name: '', nextService: '', nextServiceHours: 0, hours: 0, equipmentType:''});
+        console.log(eq.name)
     }, [equipment]);
-
     return (
         <Dialog open={open} onClose={onClose}>
             <Paper sx={{ p: 2}}>
@@ -20,22 +20,19 @@ function EditEquipment({ equipment = null, onConfirmed = (equipment) => {}, open
                         onChange={(e) => setEq({ ...eq, name: e.target.value })}
                     />
                     <TextField
-                        required
                         value={eq.nextService}
-                        type="datetime-local"
+                        type="date"
                         label='Next service'
                         InputLabelProps={{ shrink: true }}
                         onChange={(e) => setEq({ ...eq, nextService: e.target.value })}
                     />
                     <TextField
-                        required
                         value={eq.nextServiceHours}
                         type="number"
                         label='Next service hours'
                         onChange={(e) => setEq({ ...eq, nextServiceHours: parseInt(e.target.value, 10)})}
                     />
                     <TextField
-                        required
                         value={eq.hours}
                         type="number"
                         label='Hours'
@@ -46,6 +43,7 @@ function EditEquipment({ equipment = null, onConfirmed = (equipment) => {}, open
                         required
                         label='Equipment type'
                         value={eq.equipmentType}
+                        SelectProps={{ MenuProps: { style: { maxHeight: 300, }, }, }}
                         onChange={e => setEq({ ...eq, equipmentType: e.target.value })}
                     >
                         {EQUIPMENT_TYPES.map((et, index) => (

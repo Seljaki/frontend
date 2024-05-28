@@ -7,6 +7,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MapIcon from '@mui/icons-material/Map';
 import QuizIcon from '@mui/icons-material/Quiz';
 import SettingsIcon from '@mui/icons-material/Settings';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
 import theme from "../theme";
 import {Link} from "wouter";
 
@@ -67,6 +68,7 @@ function SideMenu() {
                         </IconButton>
                     </MenuItem>
                     <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
+                    <MenuItem icon={<AgricultureIcon/>} component={<Link to="/equipment" />}> Equipment </MenuItem>
                     <MenuItem icon={<SettingsIcon/>}> Settings </MenuItem>
                     <SubMenu
                         label="drop down example"

@@ -29,7 +29,7 @@
         }, []);
 
         async function onSubmit(eq) {
-            console.log(eq);
+            console.log("saved new one: "+eq);
             const data = await fetch(SERVER_URL + '/equipment', {
                 method: eq.id ? 'PUT' : 'POST',
                 headers: {
@@ -45,7 +45,7 @@
         }
 
         async function onEdit(eq) {
-            console.log(eq);
+            console.log("edited: "+eq);
             const data = await fetch(SERVER_URL + `/equipment/${eq.id}`, {
                 method: eq.id ? 'PUT' : 'POST',
                 headers: {
@@ -82,8 +82,8 @@
         };
 
         const handleCloseDialog = () => {
-            setIsDialogOpen(false);
             setEditingEquipment(null);
+            setIsDialogOpen(false);
         };
 
         return (
@@ -100,7 +100,7 @@
                     open={isDialogOpen}
                     onClose={handleCloseDialog}
                 />
-                <TableContainer component={Paper} sx={{ maxWidth: '50%' }}>
+                <TableContainer component={Paper} sx={{ maxWidth: '60%' }}>
                     <Table>
                         <TableHead>
                             <TableRow>
