@@ -9,11 +9,16 @@ import { UserContext } from "../../store/userContext";
 import { SERVER_URL } from "../../constants/http";
 import JobCostRow from "../jobCost/JobCostRow";
 
-function JobRow({job, onEdit = () => {}, onDelete = () => {}}) {
+function JobRow({job, setJob = () => {}, onEdit = () => {}, onDelete = () => {}}) {
   const { id, quantity, price, totalPrice, timeTaken, invoice_id, jobtype_id, jobType, totalCost } = job
   const [ editingJobCost, setEditingJobCost ] = useState(null)
   const [ jobCosts, setJobCosts ] = useState([])
   const userCtx = useContext(UserContext)
+
+  useEffect(() => {
+    const tCost = jobCosts.reduce((val, jc) => val + Number(jc.amount), 0)
+    setJob({...job, totalCost: tCost})
+  }, [jobCosts])
 
   useEffect(() => {
     async function fetchAllJobCosts() {

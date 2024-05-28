@@ -105,9 +105,10 @@ function DetailedInvocieView() {
         else
           addJobToinvoice(j)
       }} />}
-      { jobs.map(j => <JobRow key={j.id} job={j} onDelete={() => {deleteJob(j.id)}} onEdit={() => {
+      { jobs.map((j, index) => <JobRow key={j.id} job={j} onDelete={() => {deleteJob(j.id)}} onEdit={() => {
         setEditingJob(j)
-      }} />) }
+      }}
+       />) }
       </div>
     </div>
     </Box>
