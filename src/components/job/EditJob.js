@@ -5,8 +5,7 @@ import { getAllJobTypes } from "../../util/http/jobTypes"
 import { getTotalPriceForQuantityType, getUnitForQuantityType } from "../../constants/jobs"
 import { SERVER_URL } from "../../constants/http"
 
-function EditJob({job: j, onConfirm = (job) => {}}) {
-  const [job, setJob] = useState(j ? j : { quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
+function EditJob({job, setJob = (job) => {}, onConfirm = (job) => {}, onCancel = () => {}}) {
   const [jobTypes, setJobTypes] = useState([])
   const [plots, setPlots] = useState([])
   const userCtx = useContext(UserContext)

@@ -7,11 +7,13 @@ import ListCompanies from "./components/company/ListCompanies";
 import AddCompany from "./components/company/AddCompany";
 import EditCompany from "./components/company/EditCompany";
 import JobTypesPage from "./pages/JobTypesPage";
+import DetailedInvocieView from "./pages/DetailedInvocieView";
 
 function Routes(){
     return(
         <Switch>
             <Route path="/invoices" component={ListInvoices} />
+            <Route path="/invoices/:invoiceId" component={DetailedInvocieView} />
             <Route path="/invoices/add" component={AddInvoice} />
             <Route path="/invoices/edit/:invoiceId" component={EditInvoice} />
             <Route path="/companies" component={ListCompanies} />

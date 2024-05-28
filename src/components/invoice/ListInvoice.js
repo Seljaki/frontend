@@ -6,7 +6,7 @@ import { SERVER_URL } from '../../constants/http';
 import { Box, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, useTheme } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import EditJob from '../job/EditJob';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const ListInvoices = () => {
   const [invoices, setInvoices] = useState([]);
@@ -39,7 +39,6 @@ const ListInvoices = () => {
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
         Invoices
       </Typography>
-      <EditJob />
       <Button component={Link} href="/invoices/add" variant="contained" color="primary" sx={{ mb: 2 }}>
         Add Invoice
       </Button>
@@ -47,19 +46,24 @@ const ListInvoices = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Note</TableCell>
+              <TableCell>Customer</TableCell>
+              <TableCell>Total price</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {invoices.map((invoice) => (
               <TableRow key={invoice.id}>
-                <TableCell>{invoice.id}</TableCell>
                 <TableCell>{invoice.title}</TableCell>
                 <TableCell>{invoice.note}</TableCell>
+                <TableCell>{invoice.customer.name}</TableCell>
+                <TableCell>{invoice.totalPrice} EUR</TableCell>
                 <TableCell>
+                  <IconButton component={Link} href={`/invoices/${invoice.id}`} color="primary">
+                    <VisibilityIcon />
+                  </IconButton>
                   <IconButton component={Link} href={`/invoices/edit/${invoice.id}`} color="primary">
                     <EditIcon />
                   </IconButton>
