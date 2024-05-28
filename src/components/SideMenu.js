@@ -9,6 +9,7 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import SettingsIcon from '@mui/icons-material/Settings';
 import StoreIcon from '@mui/icons-material/Store';
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import DifferenceIcon from '@mui/icons-material/Difference';
 import theme from "../theme";
 import { Link } from "wouter";
 
@@ -70,6 +71,9 @@ function SideMenu() {
                     <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
                     <MenuItem icon={<ReceiptIcon />} component={<Link to="/invoices" />}>
                         Invoices
+                    </MenuItem>
+                    <MenuItem icon={<DifferenceIcon />} component={<Link to="/jobTypes" />}>
+                        Job types
                     </MenuItem>
                     <MenuItem icon={<StoreIcon />} component={<Link to="/companies" />}>
                         Companies

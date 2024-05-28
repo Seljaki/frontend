@@ -26,6 +26,7 @@ function JobRow({job, onEdit = () => {}, onDelete = () => {}}) {
         <Typography>Zavzet čas: {timeTaken} min</Typography>
         <Typography>TODO: PLOTS</Typography>
         <Typography>TODO: EQUIPMENT</Typography>
+        <Typography>TODO: cost</Typography>
       </AccordionDetails>
     </Accordion>
   )
