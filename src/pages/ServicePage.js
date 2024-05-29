@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {SERVER_URL} from "../constants/http";
 import {UserContext} from "../store/userContext";
 import myTheme from "../theme";
@@ -10,6 +10,8 @@ import ServiceRow from "../components/service/ServiceRow";
 
 function ServicePage() {
   const params = useParams();
+  const equipmentId = params.equipment_id
+  console.log(equipmentId)
   const [equipment, setEquipment] = useState([]);
   const [services, setServices] = useState([]);
   const [editingService, setEditingService] = useState(null);
@@ -17,7 +19,7 @@ function ServicePage() {
 
   useEffect(() => {
     async function getEquipmentById() {
-      const data = await fetch(SERVER_URL + `/equipment/${params.equipment_id}`, {
+      const data = await fetch(SERVER_URL + `/equipment/${equipmentId}`, {
         headers: {
           "x-auth-token": userCtx.token
         }
@@ -27,13 +29,25 @@ function ServicePage() {
         setEquipment(json.equipment);
       }
     }
+    async function getServices() {
+      const data = await fetch(SERVER_URL + `/services?equipment_id=${equipmentId}`, {
+        headers: {
+          "x-auth-token": userCtx.token
+        }
+      });
+      if (data.status < 300) {
+        const json = await data.json();
+        setServices(json.services);
+      }
+    }
+    getServices()
     getEquipmentById();
   }, []);
 
   async function onSubmit(se) {
-    console.log("saved new one: "+se);
+    console.log("saved new one dasdad: "+se);
     const data = await fetch(SERVER_URL + '/services', {
-      method: se.id ? 'PUT' : 'POST',
+      method: 'POST',
       headers: {
         "x-auth-token": userCtx.token,
         "Content-Type": "application/json",
@@ -43,13 +57,15 @@ function ServicePage() {
     if (data.status < 300) {
       const json = await data.json();
       setServices([json.service, ...services]);
+      handleCloseDialog();
     }
   }
 
   async function onEdit(se) {
-    console.log("edited: "+se);
+    console.log("edited: ",se);
+    console.log(se.id)
     const data = await fetch(SERVER_URL + `/services/${se.id}`, {
-      method: se.id ? 'PUT' : 'POST',
+      method: 'PUT',
       headers: {
         "x-auth-token": userCtx.token,
         "Content-Type": "application/json",
@@ -58,8 +74,9 @@ function ServicePage() {
     });
     if (data.status < 300) {
       const json = await data.json();
-      const se = json.equipment;
+      const se = json.service;
       setServices(services.map(services => services.id === se.id ? se : services));
+      handleCloseDialog();
     }
   }
 
@@ -74,7 +91,7 @@ function ServicePage() {
   }
 
   const handleAddService = () => {
-    setEditingService({ title: '', note: '', hours: 0, cost: 0.0, equipment_id: params.equipment_id});
+    setEditingService({ title: '', note: '', hours: 0, cost: 0.0, equipment_id: equipmentId});
   };
   const handleEditService = (service) => {
     setEditingService(service);
@@ -90,11 +107,12 @@ function ServicePage() {
       { editingService && <EditService
         service={editingService}
         setService={setEditingService}
+        equipment_id={equipmentId}
         onConfirmed={(s) => {
-          console.log(s)
-          if (!s.id) onSubmit(s);
-          else onEdit(s);
-          handleCloseDialog();
+          if(s.id)
+            onEdit(s)
+          else
+            onSubmit(s);
         }}
         onClose={handleCloseDialog}
       />}
@@ -107,13 +125,14 @@ function ServicePage() {
               <TableCell>Note</TableCell>
               <TableCell>Hours</TableCell>
               <TableCell>Cost</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           {services && services.map(se => (
             <ServiceRow
               onDelete={async () => {
                 if (await deleteService(se.id)) {
-                  setEquipment(equipment.filter(e => e.id !== se.id));
+                  setServices(services.filter(e => e.id !== se.id));
                 }
               }}
               onEdit={() => handleEditService(se)}

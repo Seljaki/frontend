@@ -1,36 +1,48 @@
-import { FormControl, Paper, TextField, MenuItem, Dialog, Button } from "@mui/material";
+import { FormControl, Paper, TextField, Dialog, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { EQUIPMENT_TYPES } from "../../constants/equipment";
 
-function EditService({ service= null, setServices = (se) => {}, onConfirmed = (service) => {}, open = true, onClose }) {
+function EditService({ service = null, setServices = (service) => {}, onConfirmed = (service) => {}, open = true, onClose, equipment_id}) {
+  const [localService, setLocalService] = useState(service || { title: '', note: '', hours: 0, cost: 0, equipment_id: equipment_id});
+
+  useEffect(() => {
+    setLocalService(service || { title: '', note: '', hours: 0, cost: 0, equipment_id: equipment_id });
+  }, [service]);
+
+  const handleChange = (key, value) => {
+    setLocalService({ ...localService, [key]: value });
+    setServices({ ...localService, [key]: value });
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
-      <Paper sx={{ p: 2}}>
+      <Paper sx={{ p: 2 }}>
         <FormControl fullWidth sx={{ gap: 2 }}>
           <TextField
             required
-            value={service.title}
+            value={localService.title}
             label='Title'
-            onChange={(e) => setServices({ ...service, title: e.target.value })}
+            onChange={(e) => handleChange('title', e.target.value)}
           />
           <TextField
-            value={service.note}
+            value={localService.note}
             label='Note'
-            onChange={(e) => setServices({ ...service, note: e.target.value })}
+            onChange={(e) => handleChange('note', e.target.value)}
           />
           <TextField
-            value={service.hours}
+            value={localService.hours}
             type="number"
             label='Hours'
-            onChange={(e) => setServices({ ...service, hours: parseInt(e.target.value, 10) })}
+            onChange={(e) => handleChange('hours', parseInt(e.target.value, 10))}
           />
           <TextField
-            value={service.cost}
+            value={localService.cost}
             type="number"
             label='Cost'
-            onChange={(e) => setServices({ ...service, nextServiceHours: parseFloat(e.target.value, 10)})}
+            onChange={(e) => handleChange('cost', parseFloat(e.target.value))}
           />
-          <Button variant="contained" color="primary" onClick={() => { onConfirmed(service); onClose(); }}>Confirm</Button>
+          <Button variant="contained" color="primary" onClick={() => { onConfirmed(localService); onClose(); }}>
+            Confirm
+          </Button>
         </FormControl>
       </Paper>
     </Dialog>

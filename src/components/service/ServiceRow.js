@@ -10,9 +10,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import dayjs from "dayjs";
 import {Link} from "wouter";
 import React from "react";
-
-function ServiceRow({equipment, onDelete = () => {}, onEdit = () => {}}) {
-    const {id, title, note, hours, cost} = equipment
+// react branding: ikona, naslov, sidemenu, user na podne
+function ServiceRow({service, onDelete = () => {}, onEdit = () => {}}) {
+    const {id, title, note, hours, cost} = service
     return (
         <TableBody>
             <TableRow>
@@ -28,4 +28,5 @@ function ServiceRow({equipment, onDelete = () => {}, onEdit = () => {}}) {
         </TableBody>
     )
 }
+
 export default ServiceRow
