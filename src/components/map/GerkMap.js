@@ -4,7 +4,7 @@ import { Box, useTheme } from '@mui/material';
 import { SLO_CRS } from '../../constants/crs';
 import { LeafletRightClickProvider } from 'react-leaflet-rightclick';
 
-function GerkMap({children}) {
+function GerkMap({children, isEditing}) {
   const theme = useTheme();
 
   return (
@@ -36,7 +36,7 @@ function GerkMap({children}) {
           maxZoom={21}
         />
         
-        { <WMSTileLayer transparent={true}
+        { isEditing && <WMSTileLayer transparent={true}
           layers='SI.GURS.KN:PARCELE' //'SI.GURS.ZPDZ%3ADOF025'
           url='https://ipi.eprostor.gov.si/wms-si-gurs-kn/wms?'
           params={{
@@ -67,8 +67,8 @@ function GerkMap({children}) {
         />
         {children}
       </MapContainer>
-      </LeafletRightClickProvider>
-    </Box>
+    </LeafletRightClickProvider>
+  </Box>
   )
 }
 
