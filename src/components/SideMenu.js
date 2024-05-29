@@ -10,6 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import theme from "../theme";
 import {Link} from "wouter";
+import {Avatar} from "@mui/material";
 
 const subMenuContentStyles = {
     ['.' + menuClasses.subMenuContent]: {
@@ -45,6 +46,7 @@ function SideMenu() {
         <div style={{display: 'flex', height: '100vh', minHeight: '100vh'}}>
             <Sidebar
                 collapsed={collapsed}
+                collapsedWidth="85px"
                 backgroundColor={theme.palette.background.paper}
                 rootStyles={{
                     borderRight: `1px solid ${theme.palette.secondary.main}`,
@@ -66,6 +68,10 @@ function SideMenu() {
                                     sx={buttonStyles} disableRipple>
                             {collapsed ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                         </IconButton>
+                    </MenuItem>
+                    <MenuItem component={<Link to="/" />}>
+                        <Avatar variant="square" src="./favicon.ico">
+                        </Avatar>
                     </MenuItem>
                     <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
                     <MenuItem icon={<AgricultureIcon/>} component={<Link to="/equipment" />}> Equipment </MenuItem>
