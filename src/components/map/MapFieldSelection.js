@@ -30,6 +30,8 @@ function MapFieldSelection() {
   async function savePlot(p) {
     p.crs = plot.crs
     console.log(p, title, note)
+    if(title.length < 3)
+      return
     const { KO_ID, ST_PARCELE } = p.properties
     const res = await fetch(SERVER_URL + '/plots', {
       method: 'POST',

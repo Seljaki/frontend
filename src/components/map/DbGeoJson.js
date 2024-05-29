@@ -3,8 +3,7 @@ import { GeoJSON, Popup } from "react-leaflet"
 import { UserContext } from "../../store/userContext"
 import { SERVER_URL } from "../../constants/http"
 
-function DbGeoJson({ onFeaturePressed = (feature, data) => {}}) {
-  const [plots, setPlots] = useState(null)
+function DbGeoJson({ plots, setPlots = (plots) => {}, onFeaturePressed = (feature, data) => {}}) {
   const userCtx = useContext(UserContext)
 
   useEffect(() => {
