@@ -14,7 +14,7 @@ function EquipmentRow({equipment, onDelete = () => {}, onEdit = () => {}}) {
         <TableBody>
             <TableRow>
                 <TableCell>{name}</TableCell>
-                <TableCell>{dayjs(new Date(nextService.toString())).format('ddd MMM YYYY')}</TableCell>
+                <TableCell>{dayjs(new Date(nextService.toString())).format('DD. MMM YYYY')}</TableCell>
                 <TableCell>{nextServiceHours}</TableCell>
                 <TableCell>{hours}</TableCell>
                 <TableCell>{equipmentType}</TableCell>
