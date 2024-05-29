@@ -11,7 +11,9 @@ import StoreIcon from '@mui/icons-material/Store';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import theme from "../theme";
-import { Link } from "wouter";
+import AgricultureIcon from '@mui/icons-material/Agriculture';
+import {Link} from "wouter";
+import {Avatar} from "@mui/material";
 
 const subMenuContentStyles = {
   ['.' + menuClasses.subMenuContent]: {
@@ -46,6 +48,7 @@ function SideMenu() {
 
             <Sidebar
                 collapsed={collapsed}
+                collapsedWidth="85px"
                 backgroundColor={theme.palette.background.paper}
                 rootStyles={{
                     borderRight: `1px solid ${theme.palette.secondary.main}`,
@@ -69,6 +72,10 @@ function SideMenu() {
                             {collapsed ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                         </IconButton>
                     </MenuItem>
+                    <MenuItem component={<Link to="/" />}>
+                        <Avatar variant="square" src="./favicon.ico">
+                        </Avatar>
+                    </MenuItem>
                     <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
                     <MenuItem icon={<ReceiptIcon />} component={<Link to="/invoices" />}>
                         Invoices
@@ -79,6 +86,7 @@ function SideMenu() {
                     <MenuItem icon={<StoreIcon />} component={<Link to="/companies" />}>
                         Companies
                     </MenuItem>
+                    <MenuItem icon={<AgricultureIcon/>} component={<Link to="/equipment" />}> Equipment </MenuItem>
                     <MenuItem icon={<SettingsIcon/>}> Settings </MenuItem>
                     <SubMenu
                         label="drop down example"

@@ -1,4 +1,4 @@
-import { Route, Switch } from "wouter";
+import {Route, Switch, useLocation} from "wouter";
 import MapPage from "./pages/MapPage";
 import ListInvoices from "./components/invoice/ListInvoice";
 import AddInvoice from "./components/invoice/AddInvoice";
@@ -8,8 +8,34 @@ import AddCompany from "./components/company/AddCompany";
 import EditCompany from "./components/company/EditCompany";
 import JobTypesPage from "./pages/JobTypesPage";
 import DetailedInvocieView from "./pages/DetailedInvocieView";
+import EquipmentPage from "./pages/EquipmentPage";
+import ServicePage from "./pages/ServicePage";
+import {useEffect} from "react";
 
 function Routes(){
+  const [location] = useLocation();
+  useEffect(() => {
+    const setTitle = () => {
+      switch(location) {
+        case "/map":
+          document.title = "Map";
+          break;
+        case "/equipment":
+          document.title = "Equipment";
+          break;
+        default:
+        if (location.startsWith("/service"))
+          document.title = "Service";
+        else
+          document.title = "Agro  Majster";
+      }
+    };
+    setTitle();
+    return () => {
+      setTitle();
+    };
+  }, [location]);
+
     return(
         <Switch>
             <Route path="/invoices" component={ListInvoices} />
@@ -21,6 +47,8 @@ function Routes(){
             <Route path="/edit-company/:companyId" component={EditCompany} />
             <Route path="/map" component={MapPage} />
             <Route path="/jobTypes" component={JobTypesPage} />
+            <Route path="/equipment" component={EquipmentPage} />
+            <Route path="/service/:equipment_id" component={ServicePage} />
         </Switch>
     )
 }
