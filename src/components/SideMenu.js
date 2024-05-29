@@ -53,7 +53,7 @@ function SideMenu() {
                 rootStyles={{
                     borderRight: `1px solid ${theme.palette.secondary.main}`,
                 }}
-                style={{ minHeight: '100vh'}}
+                style={{ minHeight: '100vh', zIndex:1000}}
             >
                 <Menu
                     menuItemStyles={{
@@ -87,20 +87,16 @@ function SideMenu() {
                         Companies
                     </MenuItem>
                     <MenuItem icon={<AgricultureIcon/>} component={<Link to="/equipment" />}> Equipment </MenuItem>
-                    <MenuItem icon={<SettingsIcon/>}> Settings </MenuItem>
                     <SubMenu
-                        label="drop down example"
+                        label="settings"
                         rootStyles={subMenuContentStyles}
-                        icon={<QuizIcon/>}
+                        icon={<SettingsIcon/>}
                     >
                         <MenuItem>
-                            <Link to='/hi' style={linkStyles}>
-                                i have a link
+                            <Link to='/users' style={linkStyles}>
+                                user
                             </Link>
                         </MenuItem>
-                        <MenuItem> <Link to='/' style={linkStyles}>
-                            get un-hi-ed
-                        </Link> </MenuItem>
                     </SubMenu>
                 </Menu>
             </Sidebar>
