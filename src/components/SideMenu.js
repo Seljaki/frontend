@@ -69,8 +69,8 @@ function SideMenu() {
                             {collapsed ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                         </IconButton>
                     </MenuItem>
-                    <MenuItem style={{ display: 'flex', justifyContent: 'center', flex: 1}} component={<Link to="/" />}>
-                        <Avatar style={{ justifySelf: 'center'}} variant="square" src="./favicon.ico">
+                    <MenuItem component={<Link to="/" />}>
+                        <Avatar variant="square" src="./favicon.ico">
                         </Avatar>
                     </MenuItem>
                     <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
