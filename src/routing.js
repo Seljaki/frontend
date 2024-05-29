@@ -1,5 +1,8 @@
 import {Route, Switch, useLocation} from "wouter";
 import MapPage from "./pages/MapPage";
+import ListUsers from "./components/users/ListUsers";
+import AddUser from "./components/users/AddUser";
+import EditUser from "./components/users/EditUser";
 import ListInvoices from "./components/invoice/ListInvoice";
 import AddInvoice from "./components/invoice/AddInvoice";
 import EditInvoice from "./components/invoice/EditInvoice";
@@ -46,6 +49,9 @@ function Routes(){
             <Route path="/add-company" component={AddCompany} />
             <Route path="/edit-company/:companyId" component={EditCompany} />
             <Route path="/map" component={MapPage} />
+            <Route path="/users" component={ListUsers} />
+            <Route path="/users/add" component={AddUser} />
+            <Route path="/users/edit/:userId" component={EditUser} />
             <Route path="/jobTypes" component={JobTypesPage} />
             <Route path="/equipment" component={EquipmentPage} />
             <Route path="/service/:equipment_id" component={ServicePage} />
