@@ -3,7 +3,7 @@ import axios from 'axios';
 import { UserContext } from '../../store/userContext';
 import { SERVER_URL } from '../../constants/http';
 import { Link } from 'wouter';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, useTheme } from '@mui/material';
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, useTheme, Box } from '@mui/material';
 
 const ListUsers = () => {
     const [users, setUsers] = useState([]);
@@ -41,7 +41,7 @@ const ListUsers = () => {
     };
 
     return (
-        <div>
+        <Box display="flex" flexDirection="column" flex={1} alignItems="center" sx={{p: 4}}>
             <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>Users</Typography>
             <Link to="/users/add">
                 <Button variant="contained" color="primary" sx={{ mb: 2 }}>Add User</Button>
@@ -71,7 +71,7 @@ const ListUsers = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>
+        </Box>
     );
 };
 

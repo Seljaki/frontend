@@ -1,8 +1,8 @@
 import { Route, Switch } from "wouter";
 import MapPage from "./pages/MapPage";
-import ListUsers from "./components/usersCrud/ListUsers";
-import AddUser from "./components/usersCrud/AddUser";
-import EditUser from "./components/usersCrud/EditUser";
+import ListUsers from "./components/users/ListUsers";
+import AddUser from "./components/users/AddUser";
+import EditUser from "./components/users/EditUser";
 
 function Routes(){
     return(
