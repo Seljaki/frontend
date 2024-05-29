@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, IconButton, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Button, Divider, IconButton, Typography } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -8,11 +8,15 @@ import EditJobCost from "../jobCost/EditJobCost";
 import { UserContext } from "../../store/userContext";
 import { SERVER_URL } from "../../constants/http";
 import JobCostRow from "../jobCost/JobCostRow";
+import AddJobEquipment from "./equipment/AddJobEquipment"
+import JobEquipmentRow from "./equipment/JobEquipmentRow";
 
 function JobRow({job, setJob = () => {}, onEdit = () => {}, onDelete = () => {}}) {
   const { id, quantity, price, totalPrice, timeTaken, invoice_id, jobtype_id, jobType, totalCost } = job
   const [ editingJobCost, setEditingJobCost ] = useState(null)
   const [ jobCosts, setJobCosts ] = useState([])
+  const [ equipment, setEquipment ] = useState([])
+  const [ addingEquipment, setAddingEquipment ] = useState(false)
   const userCtx = useContext(UserContext)
 
   useEffect(() => {
@@ -32,6 +36,18 @@ function JobRow({job, setJob = () => {}, onEdit = () => {}, onDelete = () => {}}
         setJobCosts(json.jobCosts)
       }
     }
+    async function fetchAllJobEquipment() {
+      const data = await fetch(SERVER_URL + `/jobs/${id}/equipment`, {
+        headers: {
+          "x-auth-token": userCtx.token,
+        },
+      });
+      if (data.status < 300) {
+        const json = await data.json();
+        setEquipment(json.equipment)
+      }
+    }
+    fetchAllJobEquipment()
     fetchAllJobCosts()
   }, [])
 
@@ -114,8 +130,14 @@ function JobRow({job, setJob = () => {}, onEdit = () => {}, onDelete = () => {}}
           onEdit={() => {setEditingJobCost(jc)}}
           onDelete={() => {deleteJobCost(jc.id)}} 
           />) }
+        <Divider />
+        <Typography>EQUIPMENT USED</Typography>
+        <Button onClick={() => {setAddingEquipment(true)}}>Add equipment used</Button>
+        { addingEquipment && <AddJobEquipment jobId={id} onEquipmentAdded={(eq) => {setEquipment([...equipment, eq]); setAddingEquipment(false)}} onClose={() => {setAddingEquipment(false)}} />}
+        { equipment.map((eq, index) => <JobEquipmentRow jobId={id} onDelete={() => {
+          setEquipment(equipment.filter(e => e.id !== eq.id))
+        }} key={`${eq.id} + ${index}`} equipment={eq} /> )}
         <Typography>TODO: PLOTS</Typography>
-        <Typography>TODO: EQUIPMENT</Typography>
       </AccordionDetails>
     </Accordion>
   )

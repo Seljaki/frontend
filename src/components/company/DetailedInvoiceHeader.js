@@ -19,7 +19,7 @@ function DetailedInvoiceHeader({ invoice }) {
         <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main, wordWrap:'break-word' }}>{title}</Typography>
         <Grid container sx={{ width: '100%', p:1 }}>
           <Grid item xs={10}>
-            <Typography sx={{wordWrap: 'break-word'}} variant="h6" sx={{ color: myTheme.palette.primary.main }}>Invoice note:</Typography>
+            <Typography sx={{wordWrap: 'break-word', color: myTheme.palette.primary.main}} variant="h6">Invoice note:</Typography>
             <Typography sx={{wordWrap: 'break-word'}}>
               {note}
             </Typography>
