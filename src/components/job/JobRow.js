@@ -10,6 +10,8 @@ import { SERVER_URL } from "../../constants/http";
 import JobCostRow from "../jobCost/JobCostRow";
 import AddJobEquipment from "./equipment/AddJobEquipment"
 import JobEquipmentRow from "./equipment/JobEquipmentRow";
+import JobPlotRow from "./plots/JobPlotRow";
+import AddJobPlot from "./plots/AddJobPlot";
 
 function JobRow({job, setJob = () => {}, onEdit = () => {}, onDelete = () => {}}) {
   const { id, quantity, price, totalPrice, timeTaken, invoice_id, jobtype_id, jobType, totalCost } = job
@@ -17,6 +19,8 @@ function JobRow({job, setJob = () => {}, onEdit = () => {}, onDelete = () => {}}
   const [ jobCosts, setJobCosts ] = useState([])
   const [ equipment, setEquipment ] = useState([])
   const [ addingEquipment, setAddingEquipment ] = useState(false)
+  const [ jobPlots, setJobPlots ] = useState([])
+  const [ addingJobPlots, setAddingJobPlots ] = useState(false)
   const userCtx = useContext(UserContext)
 
   useEffect(() => {
@@ -47,9 +51,22 @@ function JobRow({job, setJob = () => {}, onEdit = () => {}, onDelete = () => {}}
         setEquipment(json.equipment)
       }
     }
+    fetchAllJobPlots()
     fetchAllJobEquipment()
     fetchAllJobCosts()
   }, [])
+
+  async function fetchAllJobPlots() {
+    const data = await fetch(SERVER_URL + `/jobs/${id}/plots`, {
+      headers: {
+        "x-auth-token": userCtx.token,
+      },
+    });
+    if (data.status < 300) {
+      const json = await data.json();
+      setJobPlots(json.plots)
+    }
+  }
 
   async function submitJobCost(jobCost) {
     const data = await fetch(SERVER_URL + `/jobs/${id}/jobCosts`, {
@@ -137,7 +154,14 @@ function JobRow({job, setJob = () => {}, onEdit = () => {}, onDelete = () => {}}
         { equipment.map((eq, index) => <JobEquipmentRow jobId={id} onDelete={() => {
           setEquipment(equipment.filter(e => e.id !== eq.id))
         }} key={`${eq.id} + ${index}`} equipment={eq} /> )}
-        <Typography>TODO: PLOTS</Typography>
+
+        <Divider />
+        <Typography>PLOTS</Typography>
+        <Button onClick={() => {setAddingJobPlots(true)}}>Add plot</Button>
+        { addingJobPlots && <AddJobPlot onClose={() => {setAddingJobPlots(false)}} onJobPlotAdded={() => {fetchAllJobPlots(); setAddingJobPlots(false)}} jobId={id} />}
+        { jobPlots.map(jp => <JobPlotRow jobId={id} jobPlot={jp} onDeleted={() => {
+          setJobPlots(jobPlots.filter(p => p.id !== jp.id))
+        }} />) }
       </AccordionDetails>
     </Accordion>
   )
