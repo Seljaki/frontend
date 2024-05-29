@@ -1,32 +1,51 @@
+import React, { useState } from "react";
 import {
     IconButton,
     TableBody,
     TableCell,
     TableRow,
-} from "@mui/material"
+} from "@mui/material";
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import dayjs from "dayjs";
-import {Link} from "wouter";
-import React from "react";
-// react branding: ikona, naslov, sidemenu, user na podne
-function ServiceRow({service, onDelete = () => {}, onEdit = () => {}}) {
-    const {id, title, note, hours, cost} = service
+import ShowNote from "./ShowNote";
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+
+function ServiceRow({ service, onDelete = () => {}, onEdit = () => {} }) {
+    const { id, title, note, hours, cost, equipment_id } = service;
+    const [isNoteOpen, setIsNoteOpen] = useState(false);
+
+    const handleNoteOpen = () => {
+        setIsNoteOpen(true);
+    };
+
+    const handleNoteClose = () => {
+        setIsNoteOpen(false);
+    };
+
     return (
-        <TableBody>
-            <TableRow>
-                <TableCell>{title}</TableCell>
-                <TableCell>{note}</TableCell>
-                <TableCell>{hours}</TableCell>
-                <TableCell>{cost}</TableCell>
-                <TableCell>
-                    <IconButton onClick={onEdit} color="primary"><EditIcon/></IconButton>
-                    <IconButton onClick={onDelete} color="secondary"><DeleteIcon/></IconButton>
-                </TableCell>
-            </TableRow>
-        </TableBody>
-    )
+      <>
+          <TableBody>
+              <TableRow>
+                  <TableCell>{title}</TableCell>
+                  <TableCell>{hours}</TableCell>
+                  <TableCell>{cost}</TableCell>
+                  <TableCell>
+                      <IconButton onClick={handleNoteOpen} color="primary">
+                          <StickyNote2Icon/>
+                      </IconButton>
+                      <IconButton onClick={onEdit} color="primary">
+                          <EditIcon />
+                      </IconButton>
+                      <IconButton onClick={onDelete} color="secondary">
+                          <DeleteIcon />
+                      </IconButton>
+                  </TableCell>
+              </TableRow>
+          </TableBody>
+          <ShowNote note={note} open={isNoteOpen} onClose={handleNoteClose} />
+      </>
+    );
 }
 
-export default ServiceRow
+export default ServiceRow;

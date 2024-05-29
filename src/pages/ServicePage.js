@@ -11,7 +11,6 @@ import ServiceRow from "../components/service/ServiceRow";
 function ServicePage() {
   const params = useParams();
   const equipmentId = params.equipment_id
-  console.log(equipmentId)
   const [equipment, setEquipment] = useState([]);
   const [services, setServices] = useState([]);
   const [editingService, setEditingService] = useState(null);
@@ -122,7 +121,6 @@ function ServicePage() {
           <TableHead>
             <TableRow>
               <TableCell>Title</TableCell>
-              <TableCell>Note</TableCell>
               <TableCell>Hours</TableCell>
               <TableCell>Cost</TableCell>
               <TableCell>Actions</TableCell>

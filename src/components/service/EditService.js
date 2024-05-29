@@ -26,6 +26,13 @@ function EditService({ service = null, setServices = (service) => {}, onConfirme
           <TextField
             value={localService.note}
             label='Note'
+            multiline
+            inputProps={{
+              style: {
+                overflow: 'auto',
+                wordWrap: 'break-word',
+              },
+            }}
             onChange={(e) => handleChange('note', e.target.value)}
           />
           <TextField
