@@ -29,7 +29,7 @@ function ServiceRow({ service, onDelete = () => {}, onEdit = () => {} }) {
               <TableRow>
                   <TableCell>{title}</TableCell>
                   <TableCell>{hours}</TableCell>
-                  <TableCell>{cost}</TableCell>
+                  <TableCell>{cost} €</TableCell>
                   <TableCell>
                       <IconButton onClick={handleNoteOpen} color="primary">
                           <StickyNote2Icon/>
