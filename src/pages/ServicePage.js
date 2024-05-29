@@ -5,6 +5,7 @@ import myTheme from "../theme";
 import {useParams} from "wouter";
 import {Box, Button, Paper, Table, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import EditService from "../components/service/EditService";
+import ServiceRow from "../components/service/ServiceRow";
 
 
 function ServicePage() {
@@ -73,7 +74,7 @@ function ServicePage() {
   }
 
   const handleAddService = () => {
-    setEditingService({ });
+    setEditingService({ title: '', note: '', hours: 0, cost: 0.0, equipment_id: params.equipment_id});
   };
   const handleEditService = (service) => {
     setEditingService(service);
@@ -87,6 +88,7 @@ function ServicePage() {
       <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Past services of {equipment.name}</Typography>
   <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddService}>Add new</Button>
       { editingService && <EditService
+        service={editingService}
         setService={setEditingService}
         onConfirmed={(s) => {
           console.log(s)
@@ -107,7 +109,7 @@ function ServicePage() {
               <TableCell>Cost</TableCell>
             </TableRow>
           </TableHead>
-          {/*services && services.map(se => (
+          {services && services.map(se => (
             <ServiceRow
               onDelete={async () => {
                 if (await deleteService(se.id)) {
@@ -118,7 +120,7 @@ function ServicePage() {
               key={se.id}
               service={se}
             />
-          ))*/}
+          ))}
         </Table>
       </TableContainer>
     </Box>
