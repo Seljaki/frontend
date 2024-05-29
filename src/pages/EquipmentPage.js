@@ -40,6 +40,7 @@
             if (data.status < 300) {
                 const json = await data.json();
                 setEquipment([json.equipment, ...equipment]);
+                handleCloseDialog();
             }
         }
 
@@ -57,6 +58,7 @@
                 const json = await data.json();
                 const eq = json.equipment;
                 setEquipment(equipment.map(equipment => equipment.id === eq.id ? eq : equipment));
+                handleCloseDialog();
             }
         }
 
@@ -75,7 +77,7 @@
         };
 
         const handleEditEquipment = (equipment) => {
-            setEditingEquipment(equipment);
+            setEditingEquipment({...equipment, nextService: new Date(equipment.nextService)});
         };
 
         const handleCloseDialog = () => {
@@ -87,12 +89,13 @@
                 <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Equipment</Typography>
                 <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddEquipment}>Add new</Button>
                 { editingEquipment && <EditEquipment
+                  equipment={editingEquipment}
                     setEquipment={setEditingEquipment}
                     onConfirmed={(e) => {
-                        console.log(e)
-                        if (!e.id) onSubmit(e);
-                        else onEdit(e);
-                        handleCloseDialog();
+                        if (e.id)
+                            onEdit(e)
+                        else
+                            onSubmit(e);
                     }}
                     onClose={handleCloseDialog}
                 />}

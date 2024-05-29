@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 
 function EquipmentRow({equipment, onDelete = () => {}, onEdit = () => {}}) {
     const {id, name, nextService, nextServiceHours, hours, equipmentType} = equipment
+
     return (
         <TableBody>
             <TableRow>
