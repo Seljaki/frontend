@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import {Link} from "wouter";
 import React from "react";
 
-function EquipmentRow({equipment, onDelete = () => {}, onEdit = () => {}}) {
+function ServiceRow({equipment, onDelete = () => {}, onEdit = () => {}}) {
     const {id, name, nextService, nextServiceHours, hours, equipmentType} = equipment
     return (
         <TableBody>
@@ -32,4 +32,4 @@ function EquipmentRow({equipment, onDelete = () => {}, onEdit = () => {}}) {
         </TableBody>
     )
 }
-export default EquipmentRow
+export default ServiceRow
