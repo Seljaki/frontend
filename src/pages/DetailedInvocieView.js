@@ -7,6 +7,7 @@ import JobRow from "../components/job/JobRow"
 import {Box, Button} from "@mui/material"
 import DetailedInvoiceHeader from "../components/company/DetailedInvoiceHeader"
 import myTheme from "../theme";
+import DbGeoJsonInvoice from "../components/map/DbGeoJsonInvoice"
 
 function DetailedInvocieView() {
   const [invoice, setInvoice] = useState({})
@@ -105,6 +106,7 @@ function DetailedInvocieView() {
         else
           addJobToinvoice(j)
       }} />}
+      <DbGeoJsonInvoice invoiceId={invoiceId} />
       { jobs.map((j, index) => <JobRow key={j.id} job={j} onDelete={() => {deleteJob(j.id)}} onEdit={() => {
         setEditingJob(j)
       }}

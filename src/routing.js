@@ -14,6 +14,7 @@ import DetailedInvocieView from "./pages/DetailedInvocieView";
 import EquipmentPage from "./pages/EquipmentPage";
 import ServicePage from "./pages/ServicePage";
 import {useEffect} from "react";
+import HomePage from "./pages/HomePage";
 
 function Routes(){
   const [location] = useLocation();
@@ -39,24 +40,25 @@ function Routes(){
     };
   }, [location]);
 
-    return(
-        <Switch>
-            <Route path="/invoices" component={ListInvoices} />
-            <Route path="/invoices/:invoiceId" component={DetailedInvocieView} />
-            <Route path="/invoices/add" component={AddInvoice} />
-            <Route path="/invoices/edit/:invoiceId" component={EditInvoice} />
-            <Route path="/companies" component={ListCompanies} />
-            <Route path="/add-company" component={AddCompany} />
-            <Route path="/edit-company/:companyId" component={EditCompany} />
-            <Route path="/map" component={MapPage} />
-            <Route path="/users" component={ListUsers} />
-            <Route path="/users/add" component={AddUser} />
-            <Route path="/users/edit/:userId" component={EditUser} />
-            <Route path="/jobTypes" component={JobTypesPage} />
-            <Route path="/equipment" component={EquipmentPage} />
-            <Route path="/service/:equipment_id" component={ServicePage} />
-        </Switch>
-    )
+  return(
+    <Switch>
+      <Route path="/" component={HomePage} />
+      <Route path="/invoices" component={ListInvoices} />
+      <Route path="/invoices/:invoiceId" component={DetailedInvocieView} />
+      <Route path="/invoices/add" component={AddInvoice} />
+      <Route path="/invoices/edit/:invoiceId" component={EditInvoice} />
+      <Route path="/companies" component={ListCompanies} />
+      <Route path="/add-company" component={AddCompany} />
+      <Route path="/edit-company/:companyId" component={EditCompany} />
+      <Route path="/map" component={MapPage} />
+      <Route path="/users" component={ListUsers} />
+      <Route path="/users/add" component={AddUser} />
+      <Route path="/users/edit/:userId" component={EditUser} />
+      <Route path="/jobTypes" component={JobTypesPage} />
+      <Route path="/equipment" component={EquipmentPage} />
+      <Route path="/service/:equipment_id" component={ServicePage} />
+    </Switch>
+  )
 }
 
 export default Routes;
