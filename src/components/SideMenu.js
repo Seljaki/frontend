@@ -81,7 +81,7 @@ function SideMenu() {
                         Invoices
                     </MenuItem>
                     <MenuItem icon={<DifferenceIcon />} component={<Link to="/jobTypes" />}>
-                        Job types
+                        All jobs
                     </MenuItem>
                     <MenuItem icon={<StoreIcon />} component={<Link to="/companies" />}>
                         Companies

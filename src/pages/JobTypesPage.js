@@ -80,7 +80,7 @@ function JobTypesPage() {
 
   return (
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
-        <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Job types</Typography>
+        <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>All jobs</Typography>
         <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddJobType}>Add new</Button>
         <EditJobType
             jobType={editingJobType}

@@ -38,7 +38,7 @@ const ListCompanies = () => {
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
         Companies
       </Typography>
-      <Button component={Link} href="/add-company" variant="contained" color="primary" sx={{ mb: 2 }}>
+      <Button component={Link} href="/company-add" variant="contained" color="primary" sx={{ mb: 2 }}>
         Add Company
       </Button>
       <TableContainer component={Paper} sx={{ maxWidth: 800 }}>
@@ -58,7 +58,7 @@ const ListCompanies = () => {
                 <TableCell>{company.name}</TableCell>
                 <TableCell>{company.address}</TableCell>
                 <TableCell>
-                  <IconButton component={Link} href={`/edit-company/${company.id}`} color="primary">
+                  <IconButton component={Link} href={`/company-edit/${company.id}`} color="primary">
                     <EditIcon />
                   </IconButton>
                   <IconButton onClick={() => handleDelete(company.id)} color="secondary">
