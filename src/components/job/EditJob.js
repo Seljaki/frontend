@@ -41,7 +41,7 @@ function EditJob({job, setJob = (job) => {}, onConfirm = (job) => {}, onCancel =
   }, [job.jobtype_id])
 
   return (
-    <Paper sx={{ display: "flex", flexDirection: 'column' }}>
+    <Paper sx={{ display: "flex", flexDirection: 'column', width: "100%"}}>
       <Select required value={job.jobtype_id} onChange={(e) => {setJob({...job, jobtype_id: e.target.value})}}>
         { jobTypes.map(jt => <MenuItem value={jt.id}>{jt.name} - {jt.price}€</MenuItem>) }
       </Select>
