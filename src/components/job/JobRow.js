@@ -140,9 +140,9 @@ function JobRow({
       <TableRow style={{ borderBottom: "none",}}>
         <TableCell sx={{pb :0}}>{jobType.name}</TableCell>
         <TableCell sx={{pb:0}}>{quantity}</TableCell>
-        <TableCell sx={{pb:0}}>{getUnitForQuantityType(jobType.quantityType)}: {price} EUR</TableCell>
-        <TableCell sx={{pb:0}}>{totalPrice} EUR</TableCell>
-        <TableCell sx={{pb:0}}>{totalCost} EUR</TableCell>
+        <TableCell sx={{pb:0}}>{getUnitForQuantityType(jobType.quantityType)}: {price} €</TableCell>
+        <TableCell sx={{pb:0}}>{totalPrice} €</TableCell>
+        <TableCell sx={{pb:0}}>{totalCost} €</TableCell>
         <TableCell  sx={{pb:0}}>
           <IconButton onClick={onEdit} color="primary"><EditIcon /></IconButton>
           <IconButton onClick={onDelete} color="secondary"><DeleteIcon /></IconButton>
@@ -159,11 +159,15 @@ function JobRow({
             }}
           >
             <AccordionSummary expandIcon={<ExpandMoreIcon />} style={{ padding: 0 }}>
-              <Typography color="secondary">Details</Typography>
+              <Typography color="secondary">Podrobnosti</Typography>
             </AccordionSummary>
             <AccordionDetails style={{ padding: 0, borderTop:"none" }}>
               <div style={{ width: "100%" }}>
-                <Button onClick={onAddJobCostPressed}>Add job cost</Button>
+                <Typography><span style={{color: myTheme.palette.primary.main}}>Zavzet čas:</span> {timeTaken} min</Typography>
+                <Divider/>
+
+                <Typography>STROŠKI</Typography>
+                <Button variant="contained" sx={{my:1}} onClick={onAddJobCostPressed}>Dodaj stroške</Button>
                 {editingJobCost && (
                   <EditJobCost
                     jobCost={editingJobCost}
@@ -172,10 +176,9 @@ function JobRow({
                       if (editingJobCost.id) updateJobCost(editingJobCost);
                       else submitJobCost(editingJobCost);
                     }}
+                    onClose={() => setEditingJobCost(false)}
                   />
                 )}
-                <Typography>Zavzet čas: {timeTaken} min</Typography>
-
                 {jobCosts.map(jc => (
                   <JobCostRow
                     key={jc.id}
@@ -186,8 +189,8 @@ function JobRow({
                 ))}
 
                 <Divider />
-                <Typography>EQUIPMENT USED</Typography>
-                <Button onClick={() => setAddingEquipment(true)}>Add equipment used</Button>
+                <Typography>OPREMA</Typography>
+                <Button variant="contained" sx={{my:1}} onClick={() => setAddingEquipment(true)}>Dodaj uporabljeno opremo</Button>
                 {addingEquipment && (
                   <AddJobEquipment
                     jobId={id}
@@ -208,8 +211,8 @@ function JobRow({
                 ))}
 
                 <Divider />
-                <Typography>PLOTS</Typography>
-                <Button onClick={() => setAddingJobPlots(true)}>Add plot</Button>
+                <Typography>POLJA</Typography>
+                <Button variant="contained" sx={{my:1}} onClick={() => setAddingJobPlots(true)}>Dodaj polje</Button>
                 {addingJobPlots && (
                   <AddJobPlot
                     onClose={() => setAddingJobPlots(false)}

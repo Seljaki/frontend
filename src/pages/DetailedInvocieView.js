@@ -108,7 +108,7 @@ function DetailedInvocieView() {
       <DetailedInvoiceHeader invoice={invoice} />
       <Button sx={{my: 2}} variant="contained" onClick={() => {
         setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
-      }}>Add job</Button>
+      }}>Dodaj službo</Button>
       { editingJob && <EditJob job={editingJob} setJob={setEditingJob} onCancel={() => {setEditingJob(null)}} onConfirm={j => {
         if(j.id)
           updateJob(j)
@@ -119,12 +119,12 @@ function DetailedInvocieView() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell>Quantity</TableCell>
-                <TableCell>Price per quantity</TableCell>
-                <TableCell>Final price</TableCell>
-                <TableCell>Cost</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell>Naslov</TableCell>
+                <TableCell>Količina</TableCell>
+                <TableCell>Cena na </TableCell>
+                <TableCell>Cena</TableCell>
+                <TableCell>Stroški</TableCell>
+                <TableCell>Možnosti</TableCell>
               </TableRow>
             </TableHead>
           <TableBody sx={{
