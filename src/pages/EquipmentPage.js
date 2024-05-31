@@ -86,8 +86,8 @@
 
         return (
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
-                <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Equipment</Typography>
-                <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddEquipment}>Add new</Button>
+                <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Orodje</Typography>
+                <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddEquipment}>Dodaj Orodje</Button>
                 { editingEquipment && <EditEquipment
                   equipment={editingEquipment}
                     setEquipment={setEditingEquipment}
@@ -103,12 +103,12 @@
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Title</TableCell>
-                                <TableCell>Next service date</TableCell>
-                                <TableCell>Next service hours</TableCell>
-                                <TableCell>Hours</TableCell>
-                                <TableCell>Equipment type</TableCell>
-                                <TableCell>Actions</TableCell>
+                                <TableCell>Naziv</TableCell>
+                                <TableCell>Datum naslednjega servise</TableCell>
+                                <TableCell>Ure naslednjega servise</TableCell>
+                                <TableCell>Ure</TableCell>
+                                <TableCell>Vrsta orodja</TableCell>
+                                <TableCell>Možnosti</TableCell>
 
                             </TableRow>
                         </TableHead>

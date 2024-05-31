@@ -59,7 +59,7 @@ const ListInvoices = () => {
                 <TableCell>{invoice.title}</TableCell>
                 <TableCell>{invoice.note}</TableCell>
                 <TableCell>{invoice.customer.name}</TableCell>
-                <TableCell>{invoice.totalPrice} EUR</TableCell>
+                <TableCell>{invoice.totalPrice} €</TableCell>
                 <TableCell>
                   <IconButton component={Link} href={`/invoices/${invoice.id}`} color="primary">
                     <VisibilityIcon />
