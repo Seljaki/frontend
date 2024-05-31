@@ -16,7 +16,7 @@ import {
   TableHead,
   TableRow
 } from "@mui/material"
-import DetailedInvoiceHeader from "../components/company/DetailedInvoiceHeader"
+import DetailedInvoiceHeader from "../components/invoice/DetailedInvoiceHeader"
 import myTheme from "../theme";
 
 function DetailedInvocieView() {
