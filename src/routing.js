@@ -21,7 +21,7 @@ function Routes() {
     const setTitle = () => {
       switch (location) {
         case "/map":
-          document.title = "Mapa";
+          document.title = "Zemljevid";
           break;
         case "/equipment":
           document.title = "Oprema";
