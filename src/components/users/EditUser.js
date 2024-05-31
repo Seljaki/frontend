@@ -7,7 +7,7 @@ import { useLocation, useRoute } from 'wouter';
 
 const EditUser = () => {
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(null);
     const [password, setPassword] = useState('');
     const { token } = useContext(UserContext);
     const [location, setLocation] = useLocation();
@@ -48,7 +48,7 @@ const EditUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-
+        console.log(password)
         try {
             console.log('Submitting update for user:', { username, email, password });
             await axios.put(`${SERVER_URL}/users/${params.userId}`, { username, email, password }, {

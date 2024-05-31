@@ -37,20 +37,20 @@ const ListInvoices = () => {
   return (
     <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
-        Invoices
+        Računi
       </Typography>
       <Button component={Link} href="/invoices/add" variant="contained" color="primary" sx={{ mb: 2 }}>
-        Add Invoice
+        Dodaj račun
       </Button>
       <TableContainer component={Paper} sx={{ maxWidth: 800 }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Note</TableCell>
-              <TableCell>Customer</TableCell>
-              <TableCell>Total price</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>Naziv</TableCell>
+              <TableCell>Opomba</TableCell>
+              <TableCell>Stranka</TableCell>
+              <TableCell>Vsota</TableCell>
+              <TableCell>Možnosti</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
