@@ -14,6 +14,7 @@ import DetailedInvocieView from "./pages/DetailedInvocieView";
 import EquipmentPage from "./pages/EquipmentPage";
 import ServicePage from "./pages/ServicePage";
 import {useEffect} from "react";
+import HomePage from "./pages/HomePage";
 
 function Routes() {
   const [location] = useLocation();
@@ -49,6 +50,7 @@ function Routes() {
 
   return (
     <Switch>
+      <Route path="/" component={HomePage}/>
       <Route path="/invoices" component={ListInvoices}/>
       <Route path="/invoices/add" component={AddInvoice}/>
       <Route path="/invoices/edit/:invoiceId" component={EditInvoice}/>

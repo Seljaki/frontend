@@ -4,13 +4,13 @@ import { Box, useTheme } from '@mui/material';
 import { SLO_CRS } from '../../constants/crs';
 import { LeafletRightClickProvider } from 'react-leaflet-rightclick';
 
-function GerkMap({children, isEditing}) {
+function GerkMap({children, isEditing, mapRef, style = {}}) {
   const theme = useTheme();
 
   return (
-    <Box key="gerkMap" style={{ display: "flex", flex: 1, height: "100vh" }}>
+    <Box key="gerkMap" style={{ display: "flex", flex: 1, height: "100vh", ...style }}>
     <LeafletRightClickProvider>
-      <MapContainer key="gerkMap1" style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
+      <MapContainer ref={mapRef} key="gerkMap1" style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
         minZoom={10} 
         maxZoom={21} 
         center={[46.413874, 16.063868]} 

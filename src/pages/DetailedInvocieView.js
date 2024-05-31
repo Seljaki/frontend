@@ -18,6 +18,7 @@ import {
 } from "@mui/material"
 import DetailedInvoiceHeader from "../components/invoice/DetailedInvoiceHeader"
 import myTheme from "../theme";
+import DbGeoJsonInvoice from "../components/map/DbGeoJsonInvoice"
 
 function DetailedInvocieView() {
   const [invoice, setInvoice] = useState({})
@@ -103,9 +104,11 @@ function DetailedInvocieView() {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: "70%" }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 5, mr: 5, mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
       <DetailedInvoiceHeader invoice={invoice} />
+      <Box width="100%" >
+        <DbGeoJsonInvoice invoiceId={invoiceId} />
+      </Box>
       <Button sx={{my: 2}} variant="contained" onClick={() => {
         setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
       }}>Dodaj službo</Button>
@@ -140,7 +143,6 @@ function DetailedInvocieView() {
           </TableBody>
           </Table>
         </TableContainer>
-    </div>
     </Box>
   )
 }
