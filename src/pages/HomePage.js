@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { SERVER_URL } from "../constants/http";
 import { UserContext } from "../store/userContext";
-import { Bar, BarChart, CartesianGrid, Legend, Pie, PieChart, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Line, LineChart, Pie, PieChart, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { Tooltip } from "react-leaflet";
 
 function HomePage() {
@@ -9,6 +9,14 @@ function HomePage() {
   const userCtx = useContext(UserContext)
 
   const { profitPerJob, profitPerYear, profitPerMonth } = stats
+
+  function negateCosts(data) {
+    return data.map(entry => ({
+      ...entry,
+      costs: -entry.costs,
+    }));
+  }
+  const toPercent = (decimal, fixed = 0) => `${(decimal * 100).toFixed(fixed)}%`;
 
   useEffect(() => {
     async function fetchStats() {
@@ -20,7 +28,7 @@ function HomePage() {
       if (data.status < 305) {
         const json = await data.json();
         setStats(json);
-        console.log(json)
+        //console.log(json)
       }
     }
     fetchStats()
@@ -87,7 +95,7 @@ function HomePage() {
           <Bar dataKey="costs" fill="#82ca9d" stackId="stack" />
         </BarChart>}
 
-        { profitPerYear &&
+        { profitPerMonth &&
         <BarChart
           width={500}
           height={300}
@@ -109,6 +117,27 @@ function HomePage() {
           <Bar dataKey="totalIncome" fill="#8884d8" stackId="stack" />
           <Bar dataKey="costs" fill="#82ca9d" stackId="stack" />
         </BarChart>}
+        { profitPerMonth &&
+        <LineChart
+          width={500}
+          height={300}
+          data={negateCosts(profitPerMonth)}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="joining_month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <ReferenceLine y={0} stroke="#fff" />
+          <Line type="monotone" dataKey="totalIncome" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="costs" stroke="#8884d8" activeDot={{ r: 8 }} />
+        </LineChart>}
     </div>
   )
 }

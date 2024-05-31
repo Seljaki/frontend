@@ -7,7 +7,7 @@ import { useLocation, useRoute } from 'wouter';
 
 const EditUser = () => {
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(null);
     const [password, setPassword] = useState('');
     const { token } = useContext(UserContext);
     const [location, setLocation] = useLocation();

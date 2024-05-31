@@ -4,6 +4,7 @@ import { UserContext } from "../../store/userContext"
 import { SERVER_URL } from "../../constants/http"
 import GerkMap from "./GerkMap"
 import L from "leaflet";
+import { display } from "@mui/system"
 
 function DbGeoJsonInvoice({ invoiceId, onFeaturePressed = (feature, data) => {}}) {
   const [plots, setPlots] = useState(null)
@@ -37,7 +38,7 @@ function DbGeoJsonInvoice({ invoiceId, onFeaturePressed = (feature, data) => {}}
   }, [plots])
 
   return (
-    <GerkMap mapRef={mapRef}>
+    <GerkMap style={{ height: 400, display: "block" }} mapRef={mapRef}>
       { plots && <GeoJSON interactive onEachFeature={(feature, layer) => {
         layer.on({
           click() {

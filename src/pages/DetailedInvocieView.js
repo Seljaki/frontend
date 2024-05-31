@@ -100,13 +100,14 @@ function DetailedInvocieView() {
         setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
       }}>Add job</Button>
       <div>
+      <DbGeoJsonInvoice invoiceId={invoiceId} />
       { editingJob && <EditJob job={editingJob} setJob={setEditingJob} onCancel={() => {setEditingJob(null)}} onConfirm={j => {
         if(j.id)
           updateJob(j)
         else
           addJobToinvoice(j)
       }} />}
-      <DbGeoJsonInvoice invoiceId={invoiceId} />
+      
       { jobs.map((j, index) => <JobRow key={j.id} job={j} onDelete={() => {deleteJob(j.id)}} onEdit={() => {
         setEditingJob(j)
       }}
