@@ -50,6 +50,7 @@ function Routes() {
 
   return (
     <Switch>
+      <Route path="/" component={HomePage}/>
       <Route path="/invoices" component={ListInvoices}/>
       <Route path="/invoices/add" component={AddInvoice}/>
       <Route path="/invoices/edit/:invoiceId" component={EditInvoice}/>
