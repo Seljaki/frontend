@@ -77,12 +77,12 @@ const AddInvoice = () => {
     }}>
       <Paper sx={{p: 2}}>
         <Typography variant="h4" sx={{mb: 2, color: theme.palette.primary.main}}>
-          Add invoice
+          Dodaj račun
         </Typography>
         {error && <Typography color="error">{error}</Typography>}
         <Box component="form" onSubmit={handleSubmit} sx={{width: '100%', maxWidth: 400}}>
           <TextField
-            label="Title"
+            label="Naziv"
             variant="outlined"
             fullWidth
             value={title}
@@ -90,7 +90,7 @@ const AddInvoice = () => {
             sx={{mb: 2}}
           />
           <TextField
-            label="Note"
+            label="Opomba"
             variant="outlined"
             fullWidth
             value={note}
@@ -99,7 +99,7 @@ const AddInvoice = () => {
             sx={{mb: 2}}
           />
           <TextField
-            label="Started"
+            label="Začeto"
             variant="outlined"
             fullWidth
             type="date"
@@ -109,7 +109,7 @@ const AddInvoice = () => {
             InputLabelProps={{shrink: true}}
           />
           <TextField
-            label="Ended"
+            label="Končano"
             variant="outlined"
             fullWidth
             type="date"
@@ -119,7 +119,7 @@ const AddInvoice = () => {
             InputLabelProps={{shrink: true}}
           />
           <TextField
-            label="Due Date"
+            label="Rok"
             variant="outlined"
             fullWidth
             type="date"
@@ -129,12 +129,12 @@ const AddInvoice = () => {
             InputLabelProps={{shrink: true}}
           />
           <FormControl fullWidth sx={{mb: 2}}>
-            <InputLabel id="customer-label">Customer</InputLabel>
+            <InputLabel id="customer-label">Stranka</InputLabel>
             <Select
               labelId="customer-label"
               value={customerId}
               onChange={(e) => setCustomerId(e.target.value)}
-              label="Customer"
+              label="Stranka"
             >
               {companies.map((company) => (
                 <MenuItem key={company.id} value={company.id}>
@@ -144,12 +144,12 @@ const AddInvoice = () => {
             </Select>
           </FormControl>
           <FormControl fullWidth sx={{mb: 2}}>
-            <InputLabel id="issuer-label">Issuer</InputLabel>
+            <InputLabel id="issuer-label">Izdajatelj</InputLabel>
             <Select
               labelId="issuer-label"
               value={issuerId}
               onChange={(e) => setIssuerId(e.target.value)}
-              label="Issuer"
+              label="Izdajatelj"
             >
               {companies.map((company) => (
                 <MenuItem key={company.id} value={company.id}>
@@ -164,7 +164,7 @@ const AddInvoice = () => {
             color="primary"
             fullWidth
           >
-            Add
+            Dodaj
           </Button>
         </Box>
       </Paper>

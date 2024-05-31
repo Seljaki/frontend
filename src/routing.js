@@ -21,23 +21,22 @@ function Routes() {
     const setTitle = () => {
       switch (location) {
         case "/map":
-          document.title = "Map";
+          document.title = "Zemljevid";
           break;
         case "/equipment":
-          document.title = "Equipment";
-          break;
-        case "/jobTypes":
-          document.title = "Job type";
+          document.title = "Oprema";
           break;
         default:
+          if (location.startsWith("/job"))
+            document.title = "Služba";
           if (location.startsWith("/service"))
-            document.title = "Service";
+            document.title = "Servis";
           else if (location.startsWith("/invoices"))
-            document.title = "Invoice";
+            document.title = "Račun";
           else if (location.startsWith("/compan"))
-            document.title = "Company";
+            document.title = "Podjetje";
           else if (location.startsWith("/user"))
-            document.title = "User";
+            document.title = "Uporbanik";
           else
             document.title = "Agro  Majster";
       }

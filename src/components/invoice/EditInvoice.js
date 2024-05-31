@@ -111,7 +111,7 @@ const EditInvoice = () => {
       {error && <Typography color="error">{error}</Typography>}
       <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', maxWidth: 400 }}>
         <TextField
-          label="Title"
+          label="Naziv"
           variant="outlined"
           fullWidth
           value={title}

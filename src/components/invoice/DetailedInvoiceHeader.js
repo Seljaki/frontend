@@ -1,6 +1,6 @@
 import { Box, Paper, Typography, Grid } from "@mui/material";
 import myTheme from "../../theme";
-import UserDetails from "../invoice/userDetails";
+import UserDetails from "./userDetails";
 import dayjs from "dayjs";
 
 function DetailedInvoiceHeader({ invoice }) {
