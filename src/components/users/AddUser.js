@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../store/userContext';
 import { SERVER_URL } from '../../constants/http';
-import { Box, TextField, Button, Typography, useTheme } from '@mui/material';
+import {Box, TextField, Button, Typography, useTheme, Paper} from '@mui/material';
 import { useLocation } from 'wouter';
 
 const AddUser = () => {
@@ -31,12 +31,13 @@ const AddUser = () => {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
-            <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>Add User</Typography>
+        <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
+            <Paper sx={{p:2}}>
+            <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>Dodaj uporabnika</Typography>
             {error && <Typography color="error">{error}</Typography>}
             <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', maxWidth: 400 }}>
                 <TextField
-                    label="Username"
+                    label="Uporabniško ime"
                     variant="outlined"
                     fullWidth
                     value={username}
@@ -52,7 +53,7 @@ const AddUser = () => {
                     sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
                 />
                 <TextField
-                    label="Password"
+                    label="Geslo"
                     variant="outlined"
                     fullWidth
                     type="password"
@@ -62,6 +63,7 @@ const AddUser = () => {
                 />
                 <Button type="submit" variant="contained" color="primary" fullWidth>Add User</Button>
             </Box>
+            </Paper>
         </Box>
     );
 };
