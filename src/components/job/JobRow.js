@@ -137,19 +137,19 @@ function JobRow({
 
   return (
     <>
-      <TableRow style={{ borderBottom: "none",}}>
+      <TableRow>
         <TableCell sx={{pb :0}}>{jobType.name}</TableCell>
         <TableCell sx={{pb:0}}>{quantity}</TableCell>
         <TableCell sx={{pb:0}}>{getUnitForQuantityType(jobType.quantityType)}: {price} €</TableCell>
         <TableCell sx={{pb:0}}>{totalPrice} €</TableCell>
         <TableCell sx={{pb:0}}>{totalCost} €</TableCell>
-        <TableCell  sx={{pb:0}}>
+        <TableCell sx={{pb:0}}>
           <IconButton onClick={onEdit} color="primary"><EditIcon /></IconButton>
           <IconButton onClick={onDelete} color="secondary"><DeleteIcon /></IconButton>
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell colSpan={6} style={{ paddingBottom: 0, paddingTop: 0 }}>
+        <TableCell colSpan={6} style={{ pb: 0, pt: 0 }}>
           <Accordion
             style={{
               width: "100%",

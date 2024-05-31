@@ -114,7 +114,8 @@ function DetailedInvocieView() {
           updateJob(j)
         else
           addJobToinvoice(j)
-      }} />}
+      }}
+      />}
         <TableContainer component={Paper} >
           <Table>
             <TableHead>
