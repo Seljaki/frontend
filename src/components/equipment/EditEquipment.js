@@ -1,6 +1,7 @@
 import { FormControl, Paper, TextField, MenuItem, Dialog, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { EQUIPMENT_TYPES } from "../../constants/equipment";
+import dayjs from "dayjs";
 
 function EditEquipment({ equipment, setEquipment = (eq) => {}, onConfirmed = (equipment) => {}, open = true, onClose }) {
   const [localEquipment, setLocalEquipment] = useState(equipment || { name: '', nextService: '', nextServiceHours: 0, hours: 0, equipmentType:''});
@@ -25,7 +26,7 @@ function EditEquipment({ equipment, setEquipment = (eq) => {}, onConfirmed = (eq
             onChange={(e) => handleChange( 'name', e.target.value )}
           />
           <TextField
-            value={localEquipment.nextService}
+            value={dayjs(localEquipment.nextService).format('YYYY-MM-DD')}
             type="date"
             label='Next service'
             InputLabelProps={{ shrink: true }}

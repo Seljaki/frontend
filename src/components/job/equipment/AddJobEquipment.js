@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material"
+import {Autocomplete, Box, TextField} from "@mui/material"
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../../store/userContext"
 import { SERVER_URL } from "../../../constants/http"
@@ -37,19 +37,19 @@ function AddJobEquipment({ jobId, onEquipmentAdded = (equipment) => {}, onClose 
   }
 
   return (
-    <div>
+    <Box sx={{ display: 'flex'}}>
       <Autocomplete
         disablePortal
         value={selectedEquipment}
         onChange={(e, value) => {setSelectedEquipment(value)}}
         options={equipment}
-        sx={{ width: 300 }}
+        sx={{ width: 300, mr:1}}
         getOptionLabel={eq => `${eq.name} - ${eq.equipmentType}`}
-        renderInput={(params) => <TextField {...params} label="Equipment" />}
+        renderInput={(params) => <TextField {...params} label="Oprema" />}
       />
-      <TextField disabled={!selectedEquipment} type="button" value="Confirm" onClick={postJobEquipment} />
-      <TextField type="button" value="Cancel" onClick={onClose}/>
-    </div>
+      <TextField sx={{mr:1}} disabled={!selectedEquipment} type="button" value="Potrdi" onClick={postJobEquipment} />
+      <TextField type="button" value="Prekliči" onClick={onClose}/>
+    </Box>
   )
 }
 

@@ -1,4 +1,4 @@
-import { FormControl, Paper, TextField, Dialog, Button } from "@mui/material";
+import {FormControl, Paper, TextField, Dialog, Button, Typography} from "@mui/material";
 import { useEffect, useState } from "react";
 
 function EditService({ service = null, setServices = (service) => {}, onConfirmed = (service) => {}, open = true, onClose, equipment_id}) {
