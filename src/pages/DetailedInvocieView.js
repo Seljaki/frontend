@@ -1,11 +1,22 @@
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { UserContext } from "../store/userContext"
 import { useParams } from "wouter"
 import { SERVER_URL } from "../constants/http"
 import EditJob from "../components/job/EditJob"
 import JobRow from "../components/job/JobRow"
-import {Box, Button} from "@mui/material"
-import DetailedInvoiceHeader from "../components/company/DetailedInvoiceHeader"
+import {
+  Box,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  tableCellClasses,
+  TableContainer,
+  TableHead,
+  TableRow
+} from "@mui/material"
+import DetailedInvoiceHeader from "../components/invoice/DetailedInvoiceHeader"
 import myTheme from "../theme";
 import DbGeoJsonInvoice from "../components/map/DbGeoJsonInvoice"
 
@@ -98,21 +109,39 @@ function DetailedInvocieView() {
       <DetailedInvoiceHeader invoice={invoice} />
       <Button sx={{my: 2}} variant="contained" onClick={() => {
         setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
-      }}>Add job</Button>
-      <div>
+      }}>Dodaj službo</Button>
       <DbGeoJsonInvoice invoiceId={invoiceId} />
       { editingJob && <EditJob job={editingJob} setJob={setEditingJob} onCancel={() => {setEditingJob(null)}} onConfirm={j => {
         if(j.id)
           updateJob(j)
         else
           addJobToinvoice(j)
-      }} />}
-      
+      }}
+      />}
+        <TableContainer component={Paper} >
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Naslov</TableCell>
+                <TableCell>Količina</TableCell>
+                <TableCell>Cena na </TableCell>
+                <TableCell>Cena</TableCell>
+                <TableCell>Stroški</TableCell>
+                <TableCell>Možnosti</TableCell>
+              </TableRow>
+            </TableHead>
+          <TableBody sx={{
+            [`& .${tableCellClasses.root}`]: {
+              borderBottom: "none"
+            }
+          }}>
       { jobs.map((j, index) => <JobRow key={j.id} job={j} onDelete={() => {deleteJob(j.id)}} onEdit={() => {
         setEditingJob(j)
       }}
        />) }
-      </div>
+          </TableBody>
+          </Table>
+        </TableContainer>
     </div>
     </Box>
   )

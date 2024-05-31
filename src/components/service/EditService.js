@@ -1,4 +1,4 @@
-import { FormControl, Paper, TextField, Dialog, Button } from "@mui/material";
+import {FormControl, Paper, TextField, Dialog, Button, Typography} from "@mui/material";
 import { useEffect, useState } from "react";
 
 function EditService({ service = null, setServices = (service) => {}, onConfirmed = (service) => {}, open = true, onClose, equipment_id}) {
@@ -20,12 +20,12 @@ function EditService({ service = null, setServices = (service) => {}, onConfirme
           <TextField
             required
             value={localService.title}
-            label='Title'
+            label='Naziv'
             onChange={(e) => handleChange('title', e.target.value)}
           />
           <TextField
             value={localService.note}
-            label='Note'
+            label='Opomba'
             multiline
             inputProps={{
               style: {
@@ -38,13 +38,13 @@ function EditService({ service = null, setServices = (service) => {}, onConfirme
           <TextField
             value={localService.hours}
             type="number"
-            label='Hours'
+            label='Ure'
             onChange={(e) => handleChange('hours', parseInt(e.target.value, 10))}
           />
           <TextField
             value={localService.cost}
             type="number"
-            label='Cost'
+            label='Cena'
             onChange={(e) => handleChange('cost', parseFloat(e.target.value))}
           />
           <Button variant="contained" color="primary" onClick={() => { onConfirmed(localService); onClose(); }}>

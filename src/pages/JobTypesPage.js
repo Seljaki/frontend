@@ -80,8 +80,8 @@ function JobTypesPage() {
 
   return (
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
-        <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Job types</Typography>
-        <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddJobType}>Add new</Button>
+        <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Službe</Typography>
+        <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddJobType}>Dodaj Službo</Button>
         <EditJobType
             jobType={editingJobType}
             onConfirmed={(jt) => {
@@ -96,10 +96,10 @@ function JobTypesPage() {
           <Table>
             <TableHead>
               <TableRow sx={{ width: '100%' }}>
-                <TableCell>Title</TableCell>
-                <TableCell>Quantity</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell>Nazvi</TableCell>
+                <TableCell>Količina</TableCell>
+                <TableCell>Cena</TableCell>
+                <TableCell>Možnosti</TableCell>
               </TableRow>
             </TableHead>
             {jobTypes && jobTypes.map(jt => (

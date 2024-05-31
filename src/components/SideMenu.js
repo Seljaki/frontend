@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { Sidebar, Menu, MenuItem, SubMenu, menuClasses } from 'react-pro-sidebar';
-import { useTheme } from '@mui/material/styles';
+import React, {useContext, useState} from "react";
+import {Sidebar, Menu, MenuItem, SubMenu, menuClasses} from 'react-pro-sidebar';
+import {useTheme} from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MapIcon from '@mui/icons-material/Map';
-import QuizIcon from '@mui/icons-material/Quiz';
 import SettingsIcon from '@mui/icons-material/Settings';
 import StoreIcon from '@mui/icons-material/Store';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -14,6 +13,7 @@ import theme from "../theme";
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import {Link} from "wouter";
 import {Avatar} from "@mui/material";
+import {UserContext} from "../store/userContext";
 
 const subMenuContentStyles = {
   ['.' + menuClasses.subMenuContent]: {
@@ -43,65 +43,71 @@ const buttonStyles = {
 
 function SideMenu() {
   const theme = useTheme();
+  const userCtx = useContext(UserContext)
   const [collapsed, setCollapsed] = useState(false);
-    return (
+  return (
 
-            <Sidebar
-                collapsed={collapsed}
-                collapsedWidth="85px"
-                backgroundColor={theme.palette.background.paper}
-                rootStyles={{
-                    borderRight: `1px solid ${theme.palette.secondary.main}`,
-                }}
-                style={{ minHeight: '100vh', zIndex:1000}}
-            >
-                <Menu
-                    menuItemStyles={{
-                        button: ({disabled}) => ({
-                            color: disabled ? theme.palette.secondary.main : theme.palette.primary.main,
-                            '&:hover': {
-                                backgroundColor: theme.palette.custom.hover,
-                                color: theme.palette.primary.main,
-                            },
-                        }),
-                    }}
-                >
-                    <MenuItem>
-                        <IconButton onClick={() => setCollapsed(!collapsed)}
-                                    sx={buttonStyles} disableRipple>
-                            {collapsed ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
-                        </IconButton>
-                    </MenuItem>
-                    <MenuItem component={<Link to="/" />}>
-                        <Avatar variant="square" src="./favicon.ico">
-                        </Avatar>
-                    </MenuItem>
-                    <MenuItem icon={<MapIcon/>} component={<Link to="/map" />}> Map </MenuItem>
-                    <MenuItem icon={<ReceiptIcon />} component={<Link to="/invoices" />}>
-                        Invoices
-                    </MenuItem>
-                    <MenuItem icon={<DifferenceIcon />} component={<Link to="/jobTypes" />}>
-                        Job types
-                    </MenuItem>
-                    <MenuItem icon={<StoreIcon />} component={<Link to="/companies" />}>
-                        Companies
-                    </MenuItem>
-                    <MenuItem icon={<AgricultureIcon/>} component={<Link to="/equipment" />}> Equipment </MenuItem>
-                    <SubMenu
-                        label="settings"
-                        rootStyles={subMenuContentStyles}
-                        icon={<SettingsIcon/>}
-                    >
-                        <MenuItem>
-                            <Link to='/users' style={linkStyles}>
-                                user
-                            </Link>
-                        </MenuItem>
-                    </SubMenu>
-                </Menu>
-            </Sidebar>
+    <Sidebar
+      collapsed={collapsed}
+      collapsedWidth="85px"
+      backgroundColor={theme.palette.background.paper}
+      rootStyles={{
+        borderRight: `1px solid ${theme.palette.secondary.main}`,
+      }}
+      style={{minHeight: '100vh', zIndex: 1000}}
+    >
+      <Menu
+        menuItemStyles={{
+          button: ({disabled}) => ({
+            color: disabled ? theme.palette.secondary.main : theme.palette.primary.main,
+            '&:hover': {
+              backgroundColor: theme.palette.custom.hover,
+              color: theme.palette.primary.main,
+            },
+          }),
+        }}
+      >
+          <MenuItem>
+            <IconButton onClick={() => setCollapsed(!collapsed)}
+                        sx={buttonStyles} disableRipple>
+              {collapsed ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
+            </IconButton>
+          </MenuItem>
+          <MenuItem component={<Link to="/"/>}>
+            <Avatar variant="square" src="./favicon.ico">
+            </Avatar>
+          </MenuItem>
+          <MenuItem icon={<MapIcon/>} component={<Link to="/map"/>}> Zemljevid </MenuItem>
+          <MenuItem icon={<ReceiptIcon/>} component={<Link to="/invoices"/>}>
+            Računi
+          </MenuItem>
+          <MenuItem icon={<DifferenceIcon/>} component={<Link to="/jobTypes"/>}>
+            Službe
+          </MenuItem>
+          <MenuItem icon={<StoreIcon/>} component={<Link to="/companies"/>}>
+            Podjetja
+          </MenuItem>
+          <MenuItem icon={<AgricultureIcon/>} component={<Link to="/equipment"/>}> Orodja </MenuItem>
+          <SubMenu
+            label="settings"
+            rootStyles={subMenuContentStyles}
+            icon={<SettingsIcon/>}
+          >
+            <MenuItem>
+              <Link to='/users' style={linkStyles}>
+                Uporabniki
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={() => {
+              userCtx.logout()
+            }}>
+              Odjava
+            </MenuItem>
+          </SubMenu>
+      </Menu>
+    </Sidebar>
 
-    );
+  );
 }
 
 export default SideMenu;

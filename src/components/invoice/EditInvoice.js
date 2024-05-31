@@ -3,7 +3,19 @@ import { useLocation, useRoute } from 'wouter';
 import axios from 'axios';
 import { UserContext } from '../../store/userContext';
 import { SERVER_URL } from '../../constants/http';
-import { TextField, Button, Box, Typography, MenuItem, Select, FormControl, InputLabel, useTheme } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  useTheme,
+  Paper
+} from '@mui/material';
+import dayjs from "dayjs";
 
 const EditInvoice = () => {
   const [title, setTitle] = useState('');
@@ -34,10 +46,10 @@ const EditInvoice = () => {
       console.log('Fetched invoice:', invoice);
       setTitle(invoice.title);
       setNote(invoice.note);
-      setStarted(invoice.started);
-      setEnded(invoice.ended);
+      setStarted(dayjs(invoice.started).format('YYYY-MM-DD'));
+      setEnded(dayjs(invoice.ended).format('YYYY-MM-DD'));
       setIsPaid(invoice.isPaid);
-      setDueDate(invoice.dueDate);
+      setDueDate(dayjs(invoice.dueDate).format('YYYY-MM-DD'));
       setCustomerId(invoice.customer_id);
       setIssuerId(invoice.issuer_id);
       setFetched(true);
@@ -92,13 +104,14 @@ const EditInvoice = () => {
 
   return (
     <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
+      <Paper sx={{p:2}}>
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
         Edit Invoice
       </Typography>
       {error && <Typography color="error">{error}</Typography>}
       <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', maxWidth: 400 }}>
         <TextField
-          label="Title"
+          label="Naziv"
           variant="outlined"
           fullWidth
           value={title}
@@ -182,6 +195,7 @@ const EditInvoice = () => {
           Update
         </Button>
       </Box>
+      </Paper>
     </Box>
   );
 };
