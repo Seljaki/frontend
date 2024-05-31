@@ -38,7 +38,7 @@ function DbGeoJsonInvoice({ invoiceId, onFeaturePressed = (feature, data) => {}}
   }, [plots])
 
   return (
-    <GerkMap style={{ height: 400, display: "block" }} mapRef={mapRef}>
+    <GerkMap style={{ height: 400 }} mapRef={mapRef}>
       { plots && <GeoJSON interactive onEachFeature={(feature, layer) => {
         layer.on({
           click() {
