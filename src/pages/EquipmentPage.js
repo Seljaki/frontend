@@ -104,8 +104,8 @@
                         <TableHead>
                             <TableRow>
                                 <TableCell>Naziv</TableCell>
-                                <TableCell>Datum naslednjega servise</TableCell>
-                                <TableCell>Ure naslednjega servise</TableCell>
+                                <TableCell>Datum do servisa</TableCell>
+                                <TableCell>Ure do servisa</TableCell>
                                 <TableCell>Ure</TableCell>
                                 <TableCell>Vrsta orodja</TableCell>
                                 <TableCell>Možnosti</TableCell>

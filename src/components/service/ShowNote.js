@@ -6,7 +6,7 @@ function ShowNote({ note, open = true, onClose }) {
   return (
     <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
       <Paper sx={{ p: 2, overflow: 'auto', wordWrap: 'break-word' }}>
-        <Typography variant="h5" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Note</Typography>
+        <Typography variant="h5" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Opomba</Typography>
         <Typography>{note}</Typography>
       </Paper>
     </Dialog>
