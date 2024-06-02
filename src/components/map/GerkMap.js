@@ -10,7 +10,7 @@ function GerkMap({children, isEditing, mapRef, style = {}}) {
   return (
     <Box key="gerkMap" style={{ display: "flex", flex: 1, height: "100vh", ...style }}>
     <LeafletRightClickProvider>
-      <MapContainer ref={mapRef} key="gerkMap1" style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
+      <MapContainer doubleClickZoom={false} ref={mapRef} key="gerkMap1" style={{ height: "100%", width: "100%", backgroundColor: theme.palette.background.default}} 
         minZoom={10} 
         maxZoom={21} 
         center={[46.413874, 16.063868]} 
