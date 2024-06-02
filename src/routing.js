@@ -27,6 +27,9 @@ function Routes() {
         case "/equipment":
           document.title = "Oprema";
           break;
+        case "/":
+          document.title = "Statistika";
+          break;
         default:
           if (location.startsWith("/job"))
             document.title = "Služba";
