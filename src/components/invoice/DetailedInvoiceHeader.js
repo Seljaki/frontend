@@ -16,9 +16,9 @@ function DetailedInvoiceHeader({ invoice }) {
       flex: 1,
       width:'100%'
     }}>
-      <Paper sx={{ display: 'flex', flexDirection: 'column', p: 2, alignItems: 'center', width: '100%' }}>
+      <Paper sx={{ display: 'flex', flexDirection: 'column', p: 2, alignItems: 'center', flex: 1}}>
         <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main, wordWrap:'break-word' }}>{title}</Typography>
-        <Grid container sx={{ width: '100%', p:1 }}>
+        <Grid container>
           <Grid item xs={3}>
             <Typography>
               <Typography sx={{ color: myTheme.palette.primary.main }}>Začeto:</Typography>
@@ -39,7 +39,7 @@ function DetailedInvoiceHeader({ invoice }) {
           </Grid>
           <Grid item xs={3}>
             <Typography>
-              <Typography sx={{ color: myTheme.palette.primary.main }}>Rok:</Typography>
+              <Typography sx={{ color: myTheme.palette.primary.main }}>Rok plačila:</Typography>
               {dayjs(new Date(dueDate)).format('DD. MMM YYYY')}
           </Typography>
           </Grid>

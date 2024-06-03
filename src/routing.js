@@ -15,6 +15,7 @@ import EquipmentPage from "./pages/EquipmentPage";
 import ServicePage from "./pages/ServicePage";
 import {useEffect} from "react";
 import HomePage from "./pages/HomePage";
+import ErrorPage from "./pages/ErrorPage";
 
 function Routes() {
   const [location] = useLocation();
@@ -68,6 +69,7 @@ function Routes() {
       <Route path="/jobTypes" component={JobTypesPage}/>
       <Route path="/equipment" component={EquipmentPage}/>
       <Route path="/service/:equipment_id" component={ServicePage}/>
+      <Route component={ErrorPage} />
     </Switch>
   )
 }

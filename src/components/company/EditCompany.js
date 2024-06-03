@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useLocation, useRoute } from 'wouter';
+import { useLocation, useParams } from 'wouter';
 import axios from 'axios';
 import { UserContext } from '../../store/userContext';
 import { SERVER_URL } from '../../constants/http';
@@ -16,7 +16,7 @@ const EditCompany = () => {
   const [isDefaultIssuer, setIsDefaultIssuer] = useState(false);
   const { token } = useContext(UserContext);
   const [location, setLocation] = useLocation();
-  const [match, params] = useRoute('/edit-company/:companyId');
+  const params = useParams()
   const [error, setError] = useState(null);
   const theme = useTheme();
   const initialFetch = useRef(true);

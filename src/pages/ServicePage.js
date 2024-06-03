@@ -100,7 +100,7 @@ function ServicePage() {
   };
 
   return(
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 5, mr: 5, mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
       <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Pretekli servisi za {equipment.name}</Typography>
   <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddService}>Dodaj servis</Button>
       { editingService && <EditService
@@ -116,7 +116,7 @@ function ServicePage() {
         onClose={handleCloseDialog}
       />}
 
-      <TableContainer component={Paper} sx={{ maxWidth: '60%' }}>
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
