@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { useLocation, useRoute } from 'wouter';
+import { useLocation, useParams } from 'wouter';
 import axios from 'axios';
 import { UserContext } from '../../store/userContext';
 import { SERVER_URL } from '../../constants/http';
@@ -29,7 +29,7 @@ const EditInvoice = () => {
   const [companies, setCompanies] = useState([]);
   const { token } = useContext(UserContext);
   const [, setLocation] = useLocation();
-  const [match, params] = useRoute('/invoices/edit/:invoiceId');
+  const params = useParams();
   const [error, setError] = useState(null);
   const theme = useTheme();
   const [fetched, setFetched] = useState(false);

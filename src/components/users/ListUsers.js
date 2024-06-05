@@ -41,12 +41,12 @@ const ListUsers = () => {
     };
 
     return (
-        <Box display="flex" flexDirection="column" flex={1} alignItems="center" sx={{mt: 4}}>
+        <Box display="flex" flexDirection="column" flex={1} alignItems="center" sx={{ml: 5, mr: 5, mt: 4}}>
             <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>Uporabniki</Typography>
             <Link to="/users/add">
                 <Button variant="contained" color="primary" sx={{ mb: 2 }}>Dodaj uporabnika</Button>
             </Link>
-            <TableContainer component={Paper} sx={{ maxWidth: '60%' }}>
+            <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
                         <TableRow>

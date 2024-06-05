@@ -35,14 +35,14 @@ const ListInvoices = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
+    <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', ml: 5, mr: 5, mt: 4, color: theme.palette.primary.main }}>
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
         Računi
       </Typography>
       <Button component={Link} href="/invoices/add" variant="contained" color="primary" sx={{ mb: 2 }}>
         Dodaj račun
       </Button>
-      <TableContainer component={Paper} sx={{ maxWidth: 800 }}>
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>

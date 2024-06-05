@@ -104,7 +104,7 @@ function DetailedInvocieView() {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 5, mr: 5, mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 5, mr: 5, mt: 4, mb: 100, color: myTheme.palette.primary.main, flex: 1 }}>
       <DetailedInvoiceHeader invoice={invoice} />
       <Box width="100%" >
         <DbGeoJsonInvoice invoiceId={invoiceId} />

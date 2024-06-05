@@ -3,7 +3,7 @@ import axios from 'axios';
 import { UserContext } from '../../store/userContext';
 import { SERVER_URL } from '../../constants/http';
 import {Box, TextField, Button, Typography, useTheme, Paper} from '@mui/material';
-import { useLocation, useRoute } from 'wouter';
+import { useLocation, useParams } from 'wouter';
 
 const EditUser = () => {
     const [username, setUsername] = useState('');
@@ -11,7 +11,7 @@ const EditUser = () => {
     const [password, setPassword] = useState('');
     const { token } = useContext(UserContext);
     const [location, setLocation] = useLocation();
-    const [match, params] = useRoute('/users/edit/:userId');
+    const params = useParams();
     const [error, setError] = useState(null);
     const theme = useTheme();
     const [isFetched, setIsFetched] = useState(false);
@@ -19,7 +19,7 @@ const EditUser = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                console.log(`Fetching user with ID: ${params.userId}`);
+                console.log(`Fetching user with ID: `);
                 const response = await axios.get(`${SERVER_URL}/users`, {
                     headers: { 'x-auth-token': token },
                 });
