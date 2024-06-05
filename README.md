@@ -4,9 +4,9 @@ Agro Majster web is a web UI for managing your work on fields, be it for yoursel
 or for others. Helps you keep track of invoices and equipment services, while also
 providing informative graphs about your work.
 
-| ![Homepage](images\doma.png)   | ![Plots view](images\zemljevid.png) |
+| ![Homepage](images/doma.png)   | ![Plots view](images/zemljevid.png) |
 |--------------------------------|-------------------------------------|
-| ![Invoices](images\racuni.png) | ![Invoice](images\racun.png)        |
+| ![Invoices](images/racuni.png) | ![Invoice](images/racun.png)        |
 
 
 ## Prerequisites  
