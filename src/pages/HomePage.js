@@ -65,8 +65,8 @@ function HomePage() {
 
       {profitPerJob &&
         <div style={{ display: 'flex', flexFlow:"row",justifyContent: 'center', flex:1, width: "100%" }}>
-        <PieChart width={600} height={400}>
-          <text x={300} y={25} style={{padding: 1}} textAnchor="middle" dominantBaseline="middle" fontSize="20"
+        <PieChart width={600} height={500}>
+          <text x={300} y={40} style={{padding: 1}} textAnchor="middle" dominantBaseline="middle" fontSize="20"
                 fontWeight="bold" fill="#fff">
            Prihodek glede na vrsto službe
           </text>
