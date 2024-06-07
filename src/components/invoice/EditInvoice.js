@@ -21,9 +21,9 @@ const EditInvoice = () => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
   const [started, setStarted] = useState('');
-  const [ended, setEnded] = useState('');
+  const [ended, setEnded] = useState(null);
   const [isPaid, setIsPaid] = useState(false);
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState(null);
   const [customerId, setCustomerId] = useState('');
   const [issuerId, setIssuerId] = useState('');
   const [companies, setCompanies] = useState([]);
@@ -47,9 +47,11 @@ const EditInvoice = () => {
       setTitle(invoice.title);
       setNote(invoice.note);
       setStarted(dayjs(invoice.started).format('YYYY-MM-DD'));
-      setEnded(dayjs(invoice.ended).format('YYYY-MM-DD'));
+      if(invoice.ended)
+        setEnded(dayjs(invoice.ended).format('YYYY-MM-DD'));
       setIsPaid(invoice.isPaid);
-      setDueDate(dayjs(invoice.dueDate).format('YYYY-MM-DD'));
+      if(invoice.dueDate)
+        setDueDate(dayjs(invoice.dueDate).format('YYYY-MM-DD'));
       setCustomerId(invoice.customer_id);
       setIssuerId(invoice.issuer_id);
       setFetched(true);
