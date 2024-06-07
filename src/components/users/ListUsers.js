@@ -60,7 +60,7 @@ const ListUsers = () => {
                             <TableRow key={user.id}>
                                 <TableCell>{user.username}</TableCell>
                                 <TableCell>{user.email}</TableCell>
-                                <TableCell>
+                                <TableCell sx={{ gap: 1, display: 'flex'}}>
                                     <Link to={`/users/edit/${user.id}`}>
                                         <Button variant="outlined" color="primary">uredi</Button>
                                     </Link>

@@ -11,8 +11,7 @@ function EditJobType({ jobType = null, onConfirmed = (jobType) => {}, open, onCl
 
   return (
       <Dialog open={open} onClose={onClose}>
-        <Paper sx={{ p: 2}}>
-          <FormControl fullWidth sx={{ gap: 2 }}>
+        <Paper component="form" onSubmit={(e) => {e.preventDefault();onConfirmed(jt); }} sx={{ p: 2, gap: 2, display: 'flex', flexDirection: 'column'}}>
             <TextField
                 required
                 value={jt.name}
@@ -37,8 +36,7 @@ function EditJobType({ jobType = null, onConfirmed = (jobType) => {}, open, onCl
                 label='Cena na enoto'
                 onChange={(e) => setJt({ ...jt, price: e.target.value })}
             />
-            <Button variant="contained" color="primary" onClick={() => { onConfirmed(jt); onClose(); }}>Potrdi</Button>
-          </FormControl>
+            <Button variant="contained" color="primary" onClick={() => { onConfirmed(jt); }}>Potrdi</Button>
         </Paper>
       </Dialog>
   );

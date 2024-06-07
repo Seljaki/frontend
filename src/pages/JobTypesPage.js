@@ -33,6 +33,7 @@ function JobTypesPage() {
     if (data.status < 300) {
       const json = await data.json();
       setJobTypes([json.jobType, ...jobTypes]);
+      handleCloseDialog()
     }
   }
 
@@ -50,6 +51,7 @@ function JobTypesPage() {
       const json = await data.json();
       const jobType = json.jobType;
       setJobTypes([jobType, ...jobTypes.filter(j => j.id !== jobType.id)]);
+      handleCloseDialog()
     }
   }
 
@@ -87,7 +89,6 @@ function JobTypesPage() {
             onConfirmed={(jt) => {
               if (!jt.id) onSubmit(jt);
               else onEdit(jt);
-              handleCloseDialog();
             }}
             open={isDialogOpen}
             onClose={handleCloseDialog}

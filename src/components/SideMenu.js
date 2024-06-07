@@ -14,6 +14,8 @@ import AgricultureIcon from '@mui/icons-material/Agriculture';
 import {Link} from "wouter";
 import {Avatar} from "@mui/material";
 import {UserContext} from "../store/userContext";
+import LogoutIcon from '@mui/icons-material/Logout';
+import PeopleIcon from '@mui/icons-material/People';
 
 const subMenuContentStyles = {
   ['.' + menuClasses.subMenuContent]: {
@@ -93,12 +95,12 @@ function SideMenu() {
             rootStyles={subMenuContentStyles}
             icon={<SettingsIcon/>}
           >
-            <MenuItem>
+            <MenuItem icon={<PeopleIcon />}>
               <Link to='/users' style={linkStyles}>
                 Uporabniki
               </Link>
             </MenuItem>
-            <MenuItem onClick={() => {
+            <MenuItem icon={<LogoutIcon />} onClick={() => {
               userCtx.logout()
             }}>
               Odjava

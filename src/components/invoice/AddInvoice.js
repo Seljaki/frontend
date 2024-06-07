@@ -15,14 +15,15 @@ import {
   useTheme,
   Paper
 } from '@mui/material';
+import dayjs from 'dayjs';
 
 const AddInvoice = () => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
-  const [started, setStarted] = useState('');
-  const [ended, setEnded] = useState('');
+  const [started, setStarted] = useState(dayjs().format('YYYY-MM-DD'));
+  const [ended, setEnded] = useState(null);
   const [isPaid, setIsPaid] = useState(false);
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState(null);
   const [customerId, setCustomerId] = useState('');
   const [issuerId, setIssuerId] = useState('');
   const [companies, setCompanies] = useState([]);
@@ -46,7 +47,20 @@ const AddInvoice = () => {
       }
     };
 
+    async function getDefaultIssuer() {
+      const data = await fetch(SERVER_URL + `/companies/defaultIssuer`, {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+      if (data.status < 300) {
+        const json = await data.json();
+        if(json.company)
+          setIssuerId(json.company.id)
+      }
+    }
     fetchCompanies();
+    getDefaultIssuer()
   }, [token]);
 
   const handleSubmit = async (e) => {
@@ -54,12 +68,15 @@ const AddInvoice = () => {
     setError(null);
 
     try {
-      await axios.post(`${SERVER_URL}/invoices`,
+      const res = await axios.post(`${SERVER_URL}/invoices`,
         {title, note, started, ended, isPaid, dueDate, customer_id: customerId, issuer_id: issuerId},
         {headers: {'x-auth-token': token}}
       );
-
-      setLocation('/invoices');
+      
+      if(res.status < 300) {
+        
+        setLocation(`/invoices/${res.data.id}`);
+      }
     } catch (err) {
       console.error('Error:', err);
       setError(err.response ? err.response.data.message : 'An error occurred');
@@ -84,6 +101,7 @@ const AddInvoice = () => {
           <TextField
             label="Naziv"
             variant="outlined"
+            required
             fullWidth
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -101,6 +119,7 @@ const AddInvoice = () => {
           <TextField
             label="Začeto"
             variant="outlined"
+            required
             fullWidth
             type="date"
             value={started}
@@ -119,7 +138,7 @@ const AddInvoice = () => {
             InputLabelProps={{shrink: true}}
           />
           <TextField
-            label="Rok"
+            label="Rok plačila"
             variant="outlined"
             fullWidth
             type="date"
@@ -135,6 +154,7 @@ const AddInvoice = () => {
               value={customerId}
               onChange={(e) => setCustomerId(e.target.value)}
               label="Stranka"
+              required
             >
               {companies.map((company) => (
                 <MenuItem key={company.id} value={company.id}>
@@ -150,6 +170,7 @@ const AddInvoice = () => {
               value={issuerId}
               onChange={(e) => setIssuerId(e.target.value)}
               label="Izdajatelj"
+              required
             >
               {companies.map((company) => (
                 <MenuItem key={company.id} value={company.id}>

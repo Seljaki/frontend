@@ -39,6 +39,7 @@ const AddUser = () => {
                 <TextField
                     label="Uporabniško ime"
                     variant="outlined"
+                    required
                     fullWidth
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -55,6 +56,7 @@ const AddUser = () => {
                 <TextField
                     label="Geslo"
                     variant="outlined"
+                    required
                     fullWidth
                     type="password"
                     value={password}

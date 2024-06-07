@@ -45,6 +45,7 @@ const AddCompany = () => {
       {error && <Typography color="error">{error}</Typography>}
       <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', maxWidth: 400 }}>
         <TextField
+          required
           label="Naziv"
           variant="outlined"
           fullWidth
@@ -55,6 +56,7 @@ const AddCompany = () => {
         <TextField
           label="Naslov"
           variant="outlined"
+          required
           fullWidth
           value={address}
           onChange={(e) => setAddress(e.target.value)}

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { UserContext } from "../store/userContext"
-import { useParams } from "wouter"
+import { Link, useParams } from "wouter"
 import { SERVER_URL } from "../constants/http"
 import EditJob from "../components/job/EditJob"
 import JobRow from "../components/job/JobRow"
@@ -105,13 +105,18 @@ function DetailedInvocieView() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 5, mr: 5, mt: 4, mb: 100, color: myTheme.palette.primary.main, flex: 1 }}>
-      <DetailedInvoiceHeader invoice={invoice} />
-      <Box width="100%" >
+      <DetailedInvoiceHeader invoice={invoice} setInvoice={setInvoice} />
+      <Box width="100%" sx={{ pt: 2, pb: 1 }} >
         <DbGeoJsonInvoice invoiceId={invoiceId} />
       </Box>
-      <Button sx={{my: 2}} variant="contained" onClick={() => {
-        setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
-      }}>Dodaj službo</Button>
+      <Box display='flex' gap={1}>
+        <Button sx={{my: 2}} variant="contained" onClick={() => {
+          setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
+        }}>Dodaj službo</Button>
+        <Button sx={{my: 2}} LinkComponent={Link} href={`/invoices/edit/${invoice.id}`} variant="outlined"
+        >Uredi račun</Button>
+      </Box>
+      
       { editingJob && <EditJob job={editingJob} setJob={setEditingJob} onCancel={() => {setEditingJob(null)}} onConfirm={j => {
         if(j.id)
           updateJob(j)

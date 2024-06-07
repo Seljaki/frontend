@@ -16,6 +16,7 @@ function GerkMap({children, isEditing, mapRef, style = {}}) {
         center={[46.413874, 16.063868]} 
         crs={SLO_CRS} zoom={18} 
         scrollWheelZoom={true}
+        attributionControl={false}
       >
         <WMSTileLayer transparent={true}
           layers='OI.OrthoimageCoverage' //'SI.GURS.ZPDZ%3ADOF025'
