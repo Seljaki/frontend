@@ -17,6 +17,7 @@ import {useEffect} from "react";
 import HomePage from "./pages/HomePage";
 import { useTransition, a } from "react-spring";
 import ErrorPage from "./pages/ErrorPage";
+import InvoicePDFPage from "./pages/InvoicePDFPage";
 
 function Routes() {
   const [location] = useLocation();
@@ -65,6 +66,7 @@ function Routes() {
         <Route path="/" component={HomePage}/>
         <Route path="/invoices" component={ListInvoices}/>
         <Route path="/invoices/add" component={AddInvoice}/>
+        <Route path="/invoices/pdf/:invoiceId" component={InvoicePDFPage}/>
         <Route path="/invoices/edit/:invoiceId" component={EditInvoice}/>
         <Route path="/invoices/:invoiceId" component={DetailedInvocieView}/>
         <Route path="/companies" component={ListCompanies}/>
