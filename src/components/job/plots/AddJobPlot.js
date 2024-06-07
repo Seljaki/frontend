@@ -31,17 +31,19 @@ function AddJobPlot({jobId, onJobPlotAdded = () => {}, onClose = () => {}}) {
 
   return (
     <>
+      <div>
+        { selectedPlot && <Typography>Selected plot - {selectedPlot.title}</Typography>}
+        <TextField sx={{mb:1, mr: 1}} type="button" value="Izberi Polje" onClick={() => {setIsSelectingPlot(true)}}/>
+        <TextField sx={{mb:1, mr: 1}} type="date" value={date} onChange={(e) => {setDate(e.target.value)}} />
+        <TextField sx={{mb:1, mr: 1}} type="submit" value="Potrdi" disabled={selectedPlot === null} onClick={submitJobPlot} />
+        <TextField sx={{mb:1, mr: 1}} type="button" value="Prekliči" onClick={onClose}/>
+
+      </div>
       { isSelectingPlot && <SelectPlotFromMap onPlotSelected={(plot) => {
         setIsSelectingPlot(false)
         console.log("ssss: ",plot)
         setSelectedPlot(plot)
       }} />}
-      <div>
-        { selectedPlot && <Typography>Selected plot - {selectedPlot.title}</Typography>}
-        <TextField type="button" value="Choose plot" onClick={() => {setIsSelectingPlot(true)}}/>
-        <TextField type="date" value={date} onChange={(e) => {setDate(e.target.value)}} />
-        <TextField type="submit" value="Confirm" disabled={selectedPlot === null} onClick={submitJobPlot} />
-      </div>
     </>
   )
 }

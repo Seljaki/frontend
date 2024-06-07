@@ -55,11 +55,11 @@ function MapPlotDetailsOverlay() {
       { selectedPlot &&
         <MapOverlay style={{ top: 10, right: 10, padding: 2 }}>
           <IconButton onClick={(e) => {e.stopPropagation(); setSelectedPlot(null)}}><CloseRoundedIcon fontSize="large" /></IconButton>
-          <Typography>Title: {title}</Typography>
-          <Typography>Note: {note}</Typography>
-          <Typography>Size: {plotSize}m²/{(plotSize/10000).toFixed(2)}ha</Typography>
+          <Typography>Naziv: {title}</Typography>
+          <Typography>Opomba: {note}</Typography>
+          <Typography>Velikost: {plotSize}m²/{(plotSize/10000).toFixed(2)}ha</Typography>
           <Typography>ID: {plotNumber} {cadastralMunicipality}</Typography>
-          <Typography>Is archived: {String(archived)}</Typography>
+          <Typography>Je arhivirano: {archived ? 'Da' : 'Ne'}</Typography>
           <Box display="flex" flex={1} justifyContent="center">
             <IconButton color="primary" onClick={() => {setEditingPlot(selectedPlot)}}><EditIcon/></IconButton>
             <IconButton color="secondary" onClick={deletePlot} ><DeleteIcon/></IconButton>

@@ -1,12 +1,24 @@
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { UserContext } from "../store/userContext"
-import { useParams } from "wouter"
+import { Link, useParams } from "wouter"
 import { SERVER_URL } from "../constants/http"
 import EditJob from "../components/job/EditJob"
 import JobRow from "../components/job/JobRow"
-import {Box, Button} from "@mui/material"
-import DetailedInvoiceHeader from "../components/company/DetailedInvoiceHeader"
+import {
+  Box,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  tableCellClasses,
+  TableContainer,
+  TableHead,
+  TableRow
+} from "@mui/material"
+import DetailedInvoiceHeader from "../components/invoice/DetailedInvoiceHeader"
 import myTheme from "../theme";
+import DbGeoJsonInvoice from "../components/map/DbGeoJsonInvoice"
 
 function DetailedInvocieView() {
   const [invoice, setInvoice] = useState({})
@@ -92,25 +104,50 @@ function DetailedInvocieView() {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: "70%" }}>
-      <DetailedInvoiceHeader invoice={invoice} />
-      <Button sx={{my: 2}} variant="contained" onClick={() => {
-        setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
-      }}>Add job</Button>
-      <div>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ml: 5, mr: 5, mt: 4, mb: 100, color: myTheme.palette.primary.main, flex: 1 }}>
+      <DetailedInvoiceHeader invoice={invoice} setInvoice={setInvoice} />
+      <Box width="100%" sx={{ pt: 2, pb: 1 }} >
+        <DbGeoJsonInvoice invoiceId={invoiceId} />
+      </Box>
+      <Box display='flex' gap={1}>
+        <Button sx={{my: 2}} variant="contained" onClick={() => {
+          setEditingJob({ quantity: 1, price: null, timeTaken: 0, jobtype_id: null })
+        }}>Dodaj službo</Button>
+        <Button sx={{my: 2}} LinkComponent={Link} href={`/invoices/edit/${invoice.id}`} variant="outlined"
+        >Uredi račun</Button>
+      </Box>
+      
       { editingJob && <EditJob job={editingJob} setJob={setEditingJob} onCancel={() => {setEditingJob(null)}} onConfirm={j => {
         if(j.id)
           updateJob(j)
         else
           addJobToinvoice(j)
-      }} />}
+      }}
+      />}
+        <TableContainer component={Paper} >
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Naslov</TableCell>
+                <TableCell>Količina</TableCell>
+                <TableCell>Cena na </TableCell>
+                <TableCell>Cena</TableCell>
+                <TableCell>Stroški</TableCell>
+                <TableCell>Možnosti</TableCell>
+              </TableRow>
+            </TableHead>
+          <TableBody sx={{
+            [`& .${tableCellClasses.root}`]: {
+              borderBottom: "none"
+            }
+          }}>
       { jobs.map((j, index) => <JobRow key={j.id} job={j} onDelete={() => {deleteJob(j.id)}} onEdit={() => {
         setEditingJob(j)
       }}
        />) }
-      </div>
-    </div>
+          </TableBody>
+          </Table>
+        </TableContainer>
     </Box>
   )
 }

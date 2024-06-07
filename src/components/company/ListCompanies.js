@@ -34,27 +34,25 @@ const ListCompanies = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
+    <Box sx={{ display: 'flex',maxWidth: "100%", flex: 1, flexDirection: 'column', alignItems: 'center', ml: 5, mr: 5, mt: 4, color: theme.palette.primary.main }}>
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
-        Companies
+        Podjetja
       </Typography>
       <Button component={Link} href="/company-add" variant="contained" color="primary" sx={{ mb: 2 }}>
-        Add Company
+        Dodaj podjetje
       </Button>
-      <TableContainer component={Paper} sx={{ maxWidth: 800 }}>
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Address</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>Naziv</TableCell>
+              <TableCell>Naslov</TableCell>
+              <TableCell>Možnosti</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {companies.map((company) => (
               <TableRow key={company.id}>
-                <TableCell>{company.id}</TableCell>
                 <TableCell>{company.name}</TableCell>
                 <TableCell>{company.address}</TableCell>
                 <TableCell>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useLocation, useRoute } from 'wouter';
+import { useLocation, useParams } from 'wouter';
 import axios from 'axios';
 import { UserContext } from '../../store/userContext';
 import { SERVER_URL } from '../../constants/http';
-import { TextField, Button, Box, Typography, useTheme, Checkbox, FormControlLabel } from '@mui/material';
+import {TextField, Button, Box, Typography, useTheme, Checkbox, FormControlLabel, Paper} from '@mui/material';
 
 const EditCompany = () => {
   const [name, setName] = useState('');
@@ -16,7 +16,7 @@ const EditCompany = () => {
   const [isDefaultIssuer, setIsDefaultIssuer] = useState(false);
   const { token } = useContext(UserContext);
   const [location, setLocation] = useLocation();
-  const [match, params] = useRoute('/edit-company/:companyId');
+  const params = useParams()
   const [error, setError] = useState(null);
   const theme = useTheme();
   const initialFetch = useRef(true);
@@ -74,13 +74,14 @@ const EditCompany = () => {
 
   return (
     <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
+      <Paper sx={{p:2}}>
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
-        Edit Company
+        Uredi podjetje
       </Typography>
       {error && <Typography color="error">{error}</Typography>}
       <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', maxWidth: 400 }}>
         <TextField
-          label="Name"
+          label="Naziv"
           variant="outlined"
           fullWidth
           value={name}
@@ -91,7 +92,7 @@ const EditCompany = () => {
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
-          label="Address"
+          label="Naslov"
           variant="outlined"
           fullWidth
           value={address}
@@ -102,7 +103,7 @@ const EditCompany = () => {
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
-          label="Phone"
+          label="Telefon"
           variant="outlined"
           fullWidth
           value={phone}
@@ -113,7 +114,7 @@ const EditCompany = () => {
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
-          label="Tax Number"
+          label="Davčna številka"
           variant="outlined"
           fullWidth
           value={taxNumber}
@@ -156,7 +157,7 @@ const EditCompany = () => {
               color="primary"
             />
           }
-          label="Is Taxpayer"
+          label="Davčni zavezanec"
           sx={{ mb: 2 }}
         />
         <FormControlLabel
@@ -170,7 +171,7 @@ const EditCompany = () => {
               color="primary"
             />
           }
-          label="Is Default Issuer"
+          label="Prevzeti izdajatelj"
           sx={{ mb: 2 }}
         />
         <Button
@@ -179,9 +180,10 @@ const EditCompany = () => {
           color="primary"
           fullWidth
         >
-          Update
+          Posodobi
         </Button>
       </Box>
+    </Paper>
     </Box>
   );
 };

@@ -41,18 +41,18 @@ const ListUsers = () => {
     };
 
     return (
-        <Box display="flex" flexDirection="column" flex={1} alignItems="center" sx={{p: 4}}>
-            <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>Users</Typography>
+        <Box display="flex" flexDirection="column" flex={1} alignItems="center" sx={{ml: 5, mr: 5, mt: 4}}>
+            <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>Uporabniki</Typography>
             <Link to="/users/add">
-                <Button variant="contained" color="primary" sx={{ mb: 2 }}>Add User</Button>
+                <Button variant="contained" color="primary" sx={{ mb: 2 }}>Dodaj uporabnika</Button>
             </Link>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Username</TableCell>
+                            <TableCell>Uporabniško ime</TableCell>
                             <TableCell>Email</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell>Možnosti</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -60,11 +60,11 @@ const ListUsers = () => {
                             <TableRow key={user.id}>
                                 <TableCell>{user.username}</TableCell>
                                 <TableCell>{user.email}</TableCell>
-                                <TableCell>
+                                <TableCell sx={{ gap: 1, display: 'flex'}}>
                                     <Link to={`/users/edit/${user.id}`}>
-                                        <Button variant="outlined" color="primary">Edit</Button>
+                                        <Button variant="outlined" color="primary">uredi</Button>
                                     </Link>
-                                    <Button variant="outlined" color="secondary" onClick={() => handleDelete(user.id)}>Delete</Button>
+                                    <Button variant="outlined" color="secondary" onClick={() => handleDelete(user.id)}>Briši</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

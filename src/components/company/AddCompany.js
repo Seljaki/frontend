@@ -3,7 +3,7 @@ import { useLocation } from 'wouter';
 import axios from 'axios';
 import { UserContext } from '../../store/userContext';
 import { SERVER_URL } from '../../constants/http';
-import { TextField, Button, Box, Typography, useTheme, FormControlLabel, Checkbox } from '@mui/material';
+import {TextField, Button, Box, Typography, useTheme, FormControlLabel, Checkbox, Paper} from '@mui/material';
 
 const AddCompany = () => {
   const [name, setName] = useState('');
@@ -38,13 +38,15 @@ const AddCompany = () => {
 
   return (
     <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', mt: 4, color: theme.palette.primary.main }}>
+      <Paper sx={{p:2}}>
       <Typography variant="h4" sx={{ mb: 2, color: theme.palette.primary.main }}>
-        Add Company
+        Dodaj podjetje
       </Typography>
       {error && <Typography color="error">{error}</Typography>}
       <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', maxWidth: 400 }}>
         <TextField
-          label="Name"
+          required
+          label="Naziv"
           variant="outlined"
           fullWidth
           value={name}
@@ -52,15 +54,16 @@ const AddCompany = () => {
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
-          label="Address"
+          label="Naslov"
           variant="outlined"
+          required
           fullWidth
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
-          label="Phone"
+          label="Telefon"
           variant="outlined"
           fullWidth
           value={phone}
@@ -68,7 +71,7 @@ const AddCompany = () => {
           sx={{ mb: 2, input: { color: theme.palette.primary.main } }}
         />
         <TextField
-          label="Tax Number"
+          label="Davčna številka"
           variant="outlined"
           fullWidth
           value={taxNumber}
@@ -99,7 +102,7 @@ const AddCompany = () => {
               color="primary"
             />
           }
-          label="Is Taxpayer"
+          label="Davčni zavezanec"
           sx={{ mb: 2 }}
         />
         <FormControlLabel
@@ -110,18 +113,19 @@ const AddCompany = () => {
               color="primary"
             />
           }
-          label="Is Default Issuer"
+          label="Prevzeti izdajatelj"
           sx={{ mb: 2 }}
         />
         <Button
-          type="submit"
+          type="Potrdi"
           variant="contained"
           color="primary"
           fullWidth
         >
-          Add
+          Dodaj
         </Button>
       </Box>
+      </Paper>
     </Box>
   );
 };

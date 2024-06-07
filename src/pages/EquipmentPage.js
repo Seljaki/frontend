@@ -85,9 +85,9 @@
         };
 
         return (
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
-                <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Equipment</Typography>
-                <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddEquipment}>Add new</Button>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',  ml: 5, mr: 5, mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
+                <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Stroji in oprema</Typography>
+                <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddEquipment}>Dodaj stroj</Button>
                 { editingEquipment && <EditEquipment
                   equipment={editingEquipment}
                     setEquipment={setEditingEquipment}
@@ -99,16 +99,16 @@
                     }}
                     onClose={handleCloseDialog}
                 />}
-                <TableContainer component={Paper} sx={{ maxWidth: '60%' }}>
+                <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Title</TableCell>
-                                <TableCell>Next service date</TableCell>
-                                <TableCell>Next service hours</TableCell>
-                                <TableCell>Hours</TableCell>
-                                <TableCell>Equipment type</TableCell>
-                                <TableCell>Actions</TableCell>
+                                <TableCell>Naziv</TableCell>
+                                <TableCell>Datum do servisa</TableCell>
+                                <TableCell>Ure do servisa</TableCell>
+                                <TableCell>Ure</TableCell>
+                                <TableCell>Vrsta orodja</TableCell>
+                                <TableCell>Možnosti</TableCell>
 
                             </TableRow>
                         </TableHead>

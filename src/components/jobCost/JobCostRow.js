@@ -6,7 +6,7 @@ function JobCostRow({jobCost, onEdit = () => {}, onDelete = () => {}}) {
   const { id, title, amount } = jobCost
   return (
     <div>
-      {title} - {amount} EUR
+      {title} - {amount} €
       <IconButton onClick={onEdit} color="primary"><EditIcon/></IconButton>
       <IconButton onClick={onDelete} color="secondary"><DeleteIcon/></IconButton>
     </div>
