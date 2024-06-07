@@ -2,11 +2,14 @@ import { Box, Paper, Typography, Grid } from "@mui/material";
 import myTheme from "../../theme";
 import UserDetails from "./userDetails";
 import dayjs from "dayjs";
+import IsInvoicePaidCheckBox from "./IsInvoicePaidCheckBox";
+import { useContext } from "react";
+import { UserContext } from "../../store/userContext";
 
-function DetailedInvoiceHeader({ invoice }) {
+function DetailedInvoiceHeader({ invoice, setInvoice = (invoice) => {} }) {
   const { id, title, note, started, ended, isPaid, dueDate, issuer = {}, customer = {}, totalPrice } = invoice || {};
-  console.log(JSON.stringify(customer));
-  console.log(isPaid)
+  const userCtx = useContext(UserContext)
+
   return (
     <Box sx={{
       display: 'flex',
@@ -22,25 +25,28 @@ function DetailedInvoiceHeader({ invoice }) {
           <Grid item xs={3}>
             <Typography>
               <Typography sx={{ color: myTheme.palette.primary.main }}>Začeto:</Typography>
-            {dayjs(new Date(started)).format('DD. MMM YYYY')}
+            {dayjs(started).format('DD. MMM YYYY')}
           </Typography>
           </Grid>
           <Grid item xs={3}>
             <Typography>
               <Typography sx={{ color: myTheme.palette.primary.main }}>Končano:</Typography>
-              {dayjs(new Date(ended)).format('DD. MMM YYYY')}
+              { ended ? dayjs(ended).format('DD. MMM YYYY') : "nedoločeno"}
           </Typography>
           </Grid>
           <Grid item xs={3}>
             <Typography>
               <Typography sx={{ color: myTheme.palette.primary.main }}>Stanje:</Typography>
+              <IsInvoicePaidCheckBox token={userCtx.token} invoiceId={id} isPaid={isPaid} setIsPaid={(isPaid) => {
+                  setInvoice({...invoice, isPaid: isPaid})
+                }} />
               {isPaid ? "plačano" : "neplačano"}
           </Typography>
           </Grid>
           <Grid item xs={3}>
             <Typography>
               <Typography sx={{ color: myTheme.palette.primary.main }}>Rok plačila:</Typography>
-              {dayjs(new Date(dueDate)).format('DD. MMM YYYY')}
+              { dueDate ? dayjs(dueDate).format('DD. MMM YYYY') : "nedoločeno"}
           </Typography>
           </Grid>
           <Grid item xs={10}>
