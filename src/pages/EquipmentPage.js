@@ -86,8 +86,8 @@
 
         return (
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',  ml: 5, mr: 5, mt: 4, color: myTheme.palette.primary.main, flex: 1 }}>
-                <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Orodje</Typography>
-                <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddEquipment}>Dodaj Orodje</Button>
+                <Typography variant="h4" sx={{ mb: 2, color: myTheme.palette.primary.main }}>Stroji in oprema</Typography>
+                <Button variant="contained" color="primary" sx={{ mb: 2 }} onClick={handleAddEquipment}>Dodaj stroj</Button>
                 { editingEquipment && <EditEquipment
                   equipment={editingEquipment}
                     setEquipment={setEditingEquipment}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import LoginPage from "./pages/LoginPage";
 import { UserContext } from "./store/userContext";
 import Routes from "./routing";

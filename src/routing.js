@@ -27,7 +27,7 @@ function Routes() {
           document.title = "Zemljevid";
           break;
         case "/equipment":
-          document.title = "Oprema";
+          document.title = "Stroji";
           break;
         case "/":
           document.title = "Statistika";

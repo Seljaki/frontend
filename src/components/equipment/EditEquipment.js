@@ -47,7 +47,7 @@ function EditEquipment({ equipment, setEquipment = (eq) => {}, onConfirmed = (eq
           <TextField
             select
             required
-            label='Vrsta Orodja'
+            label='Vrsta stroja'
             value={localEquipment.equipmentType}
             SelectProps={{ MenuProps: { style: { maxHeight: 300, }, }, }}
             onChange={e => handleChange( 'equipmentType', e.target.value )}

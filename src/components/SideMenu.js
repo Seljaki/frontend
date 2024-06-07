@@ -16,6 +16,7 @@ import {Avatar} from "@mui/material";
 import {UserContext} from "../store/userContext";
 import LogoutIcon from '@mui/icons-material/Logout';
 import PeopleIcon from '@mui/icons-material/People';
+import LogoPic from './../assets/logo.png'
 
 const subMenuContentStyles = {
   ['.' + menuClasses.subMenuContent]: {
@@ -76,8 +77,7 @@ function SideMenu() {
             </IconButton>
           </MenuItem>
           <MenuItem component={<Link to="/"/>}>
-            <Avatar variant="square" src="./favicon.ico">
-            </Avatar>
+            <Avatar variant="square" src={LogoPic} />
           </MenuItem>
           <MenuItem icon={<MapIcon/>} component={<Link to="/map"/>}> Zemljevid </MenuItem>
           <MenuItem icon={<ReceiptIcon/>} component={<Link to="/invoices"/>}>
@@ -89,7 +89,9 @@ function SideMenu() {
           <MenuItem icon={<StoreIcon/>} component={<Link to="/companies"/>}>
             Podjetja
           </MenuItem>
-          <MenuItem icon={<AgricultureIcon/>} component={<Link to="/equipment"/>}> Orodja </MenuItem>
+          <MenuItem icon={<AgricultureIcon/>} component={<Link to="/equipment"/>}> 
+            Stroji
+          </MenuItem>
           <SubMenu
             label="settings"
             rootStyles={subMenuContentStyles}
