@@ -1,3 +1,5 @@
+![banner](images/banner-web-seljaki.png)
+
 # About Agro Majster Web
 
 Agro Majster web is a web UI for managing your work on fields, be it for yourself
