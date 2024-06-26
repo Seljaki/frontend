@@ -72,7 +72,6 @@ function HomePage() {
           </text>
           <Pie
             dataKey="totalIncome"
-            isAnimationActive={false}
             data={profitPerJob}
             cx="50%"
             cy="50%"
